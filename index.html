@@ -33,7 +33,7 @@ function googleTranslateElementInit() {
      ║  ถ้าปล่อยว่าง → section แผนที่จะซ่อนอัตโนมัติ  ║
      ╚══════════════════════════════════════════════════╝ -->
 <script>
-const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F&ll=13.72356653529976,100.56547608379594&z=13"; // ← วาง URL ตรงนี้ระหว่าง "" ครับ
+const MAP_EMBED_URL = ""; // ← วาง URL ตรงนี้ระหว่าง "" ครับ
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +83,7 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   .map-wrap iframe { width:100%; height:420px; border:none; display:block; }
 
   /* ── CARDS ── */
-  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; }
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2px; }
   .property-card { background:var(--charcoal-mid); cursor:pointer; position:relative; overflow:hidden; transition:transform 0.4s ease; text-decoration:none; color:inherit; display:block; }
   .property-card:hover { transform:translateY(-4px); }
   .card-img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform 0.6s ease; background:var(--charcoal-light); }
@@ -92,10 +92,10 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   .card-body { padding:1.5rem; border-top:1px solid rgba(201,169,110,0.15); }
   .card-tag { font-size:10px; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:0.6rem; }
   .card-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:400; margin-bottom:1rem; line-height:1.2; }
-  .card-info-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .info-item { font-size:12px; color:var(--text-muted); font-weight:500; letter-spacing:0.05em; }
-  .info-sep { font-size:11px; color:var(--text-subtle); }
-  .info-price { font-size:12px; font-weight:400; color:var(--gold); letter-spacing:0.05em; }
+  .card-info-row { display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:0.5rem; }
+  .info-item { font-size:13px; color:var(--cream-dark); font-weight:400; }
+  .info-sep { font-size:12px; color:var(--text-subtle); }
+  .info-price { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--gold); }
   .card-arrow { position:absolute; bottom:1.5rem; right:1.5rem; width:36px; height:36px; border:1px solid rgba(201,169,110,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
   .property-card:hover .card-arrow { background:var(--gold); border-color:var(--gold); }
   .card-arrow svg { width:14px; height:14px; stroke:var(--gold); transition:stroke 0.3s; }
@@ -143,6 +143,7 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   <div class="section-label"><span class="line"></span><span>Selected Units</span></div>
   <h2 class="section-title">Properties for you</h2>
   <div class="cards-grid" id="cards-grid"></div>
+  <div id="pagination" style="display:flex;gap:8px;justify-content:center;margin-top:2rem;flex-wrap:wrap;"></div>
 </section>
 
 <!-- FOOTER -->
@@ -182,13 +183,9 @@ visible.forEach(room => {
       <div class="card-name notranslate">${room.name}</div>
       <div class="card-info-row">
         <span class="info-item">${room.sqm} SQ.M.</span>
-        <span class="info-sep">|</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M3 11V19M21 11V19M3 11C3 8 6 6 12 6C18 6 21 8 21 11M3 19H21M7 11V19M17 11V19"/></svg>
-        <span class="info-item">${room.bedBath ? room.bedBath.split('/')[0].trim() : '—'}</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M4 12H20M4 12V18H20V12M4 12V8C4 6.9 4.9 6 6 6H10C11.1 6 12 6.9 12 8V12"/></svg>
-        <span class="info-item">${room.bedBath ? room.bedBath.split('/')[1].trim() : '—'}</span>
-        <span class="info-sep">|</span>
-        <span class="info-price">${room.price} THB</span>
+        ${room.bedBath ? `<span class="info-sep">·</span><span class="info-item">${room.bedBath}</span>` : ''}
+        <span class="info-sep">·</span>
+        <span class="info-price">฿${room.price}</span>
       </div>
       <div class="card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -201,6 +198,26 @@ visible.forEach(room => {
 
 if (visible.length === 0) {
   grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--text-muted);font-size:13px;letter-spacing:0.1em;border:1px dashed rgba(201,169,110,0.2);">ยังไม่มีทรัพย์ที่แสดง — กรอกข้อมูลใน admin.html แล้ว generate rooms-data.js</div>`;
+}
+
+// ── PAGINATION ────────────────────────────────────────────────────────────
+if (totalPages > 1) {
+  const pg = document.getElementById('pagination');
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('a');
+    btn.href = `?page=${i}`;
+    btn.textContent = i;
+    btn.style.cssText = `
+      padding:8px 16px;
+      border:1px solid ${i===currentPage ? 'var(--gold)' : 'var(--charcoal-border)'};
+      color:${i===currentPage ? 'var(--gold)' : 'var(--text-muted)'};
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:0.1em;
+      transition:all 0.2s;
+    `;
+    pg.appendChild(btn);
+  }
 }
 </script>
 
