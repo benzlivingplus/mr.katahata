@@ -342,12 +342,6 @@ const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
     <div class="travel-grid" id="travel-grid"></div>
   </div>
 
-// ── MAP ──────────────────────────────────────────────────────────────────────
-if (ROOM.mapUrl) {
-  document.getElementById('map-section').style.display = 'block';
-  document.getElementById('room-map-wrap').innerHTML =
-    `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
-}
   
   <!-- VIDEO (ซ่อนถ้าไม่มี videoId) -->
   <div class="video-section" id="video-section" style="display:none;">
@@ -505,6 +499,13 @@ if (!hasCar && !hasWalk) {
   travelGrid.appendChild(dw);
 }
 
+// ── MAP ──────────────────────────────────────────────────────────────────────
+if (ROOM.mapUrl) {
+  document.getElementById('map-section').style.display = 'block';
+  document.getElementById('room-map-wrap').innerHTML =
+    `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
+}
+  
 // ── VIDEO (ซ่อนถ้าไม่มี videoId) ─────────────────────────────────────────────
 if (ROOM.videoId) {
   document.getElementById('video-section').style.display = 'block';
