@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property for Mr. Ro — THE LIVING PLUS</title>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'th', includedLanguages: 'th,en,ja',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ████████████████████████████████████████████████
+     📋 ROOMS DATA — ดึงข้อมูลจากไฟล์กลาง
+     ████████████████████████████████████████████████ -->
+<script src="rooms-data.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E; --gold-light: #E8D5B0;
+    --charcoal: #1A1A1A; --charcoal-mid: #2D2D2D; --charcoal-light: #3D3D3D;
+    --cream: #F7F3EC; --cream-dark: #EDE6D8;
+    --text-muted: #8A8A8A; --text-subtle: #5A5A5A;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:var(--charcoal); color:var(--cream); min-height:100vh; overflow-x:hidden; }
+
+  /* ── GOOGLE TRANSLATE ── */
+  #google_translate_element { display:inline-block; }
+  .goog-te-gadget-simple { background:transparent !important; border:1px solid rgba(201,169,110,0.4) !important; border-radius:3px !important; padding:4px 10px !important; cursor:pointer; }
+  .goog-te-gadget-simple span, .goog-te-gadget-simple .goog-te-menu-value span { color:var(--gold) !important; font-family:'DM Sans',sans-serif !important; font-size:12px !important; letter-spacing:0.1em !important; }
+  .goog-te-gadget-simple .goog-te-menu-value span:last-child { display:none !important; }
+  .goog-te-banner-frame { display:none !important; }
+  body { top:0 !important; }
+
+  /* ── TOP NAV ── */
+  .top-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(to bottom,rgba(26,26,26,0.95),transparent); backdrop-filter:blur(8px); }
+  .nav-brand { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:300; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; }
+
+  /* ── HERO ── */
+  .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,169,110,0.12) 0%,transparent 60%); pointer-events:none; }
+  .hero-ornament { display:flex; align-items:center; gap:1.5rem; margin-bottom:2.5rem; opacity:0; animation:fadeUp 0.8s 0.2s ease forwards; }
+  .hero-ornament .line { width:60px; height:1px; background:var(--gold); opacity:0.6; }
+  .hero-ornament span { font-size:11px; font-weight:500; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; }
+  .hero-greeting { font-family:'Cormorant Garamond',serif; font-size:clamp(1rem,2vw,1.2rem); font-weight:300; font-style:italic; color:var(--text-muted); margin-bottom:1rem; opacity:0; animation:fadeUp 0.8s 0.4s ease forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,8vw,6rem); font-weight:300; line-height:1.1; margin-bottom:0.5rem; opacity:0; animation:fadeUp 0.8s 0.5s ease forwards; }
+  .hero-title .accent { color:var(--gold); font-style:italic; }
+  .hero-subtitle { font-size:clamp(0.7rem,1.5vw,0.85rem); letter-spacing:0.25em; color:var(--text-muted); text-transform:uppercase; margin-top:1.2rem; opacity:0; animation:fadeUp 0.8s 0.7s ease forwards; }
+  .hero-divider { width:1px; height:80px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); margin:3rem auto; opacity:0; animation:fadeIn 1s 1s ease forwards; }
+  .hero-meta { display:flex; gap:3rem; justify-content:center; opacity:0; animation:fadeUp 0.8s 1.1s ease forwards; }
+  .hero-meta-item { text-align:center; }
+  .hero-meta-item .num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:var(--gold); line-height:1; }
+  .hero-meta-item .label { font-size:11px; letter-spacing:0.15em; color:var(--text-muted); text-transform:uppercase; margin-top:0.4rem; }
+  .scroll-hint { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s 1.5s ease forwards; }
+  .scroll-hint span { font-size:10px; letter-spacing:0.2em; color:var(--text-muted); text-transform:uppercase; }
+  .scroll-hint .arrow { width:1px; height:40px; background:linear-gradient(to bottom,var(--gold),transparent); animation:scrollPulse 2s ease-in-out infinite; }
+
+  /* ── SECTIONS ── */
+  section { padding:6rem 2rem; max-width:1200px; margin:0 auto; }
+  .section-label { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
+  .section-label .line { width:30px; height:1px; background:var(--gold); opacity:0.6; }
+  .section-label span { font-size:11px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:300; margin-bottom:3rem; line-height:1.2; }
+
+  /* ── MAP ── */
+  .map-wrap { border-radius:4px; overflow:hidden; border:1px solid rgba(201,169,110,0.2); background:var(--charcoal-mid); }
+  .map-placeholder { width:100%; height:420px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem; color:var(--text-muted); }
+  .map-placeholder p { font-size:13px; letter-spacing:0.1em; }
+  .map-placeholder .embed-hint { font-size:11px; color:var(--text-subtle); font-family:monospace; background:rgba(255,255,255,0.05); padding:6px 12px; border-radius:4px; }
+
+  /* ── CARDS ── */
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:2px; }
+  .property-card { background:var(--charcoal-mid); cursor:pointer; position:relative; overflow:hidden; transition:transform 0.4s ease; text-decoration:none; color:inherit; display:block; }
+  .property-card:hover { transform:translateY(-4px); }
+  .card-img { width:100%; aspect-ratio:4/3; object-fit:cover; display:block; transition:transform 0.6s ease; background:var(--charcoal-light); }
+  .property-card:hover .card-img { transform:scale(1.03); }
+  .card-img-placeholder { width:100%; aspect-ratio:4/3; background:var(--charcoal-light); display:flex; align-items:center; justify-content:center; color:var(--text-subtle); font-size:12px; letter-spacing:0.1em; }
+  .card-body { padding:1.5rem; border-top:1px solid rgba(201,169,110,0.15); }
+  .card-tag { font-size:10px; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:0.6rem; }
+  .card-name { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:400; margin-bottom:1rem; line-height:1.2; }
+  .card-specs { display:flex; gap:1.5rem; margin-bottom:1.2rem; }
+  .card-spec { display:flex; flex-direction:column; gap:2px; }
+  .card-spec .val { font-size:15px; font-weight:500; color:var(--cream); }
+  .card-spec .lbl { font-size:10px; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase; }
+  .card-price { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:var(--gold); }
+  .card-price .currency { font-size:1rem; font-weight:300; margin-right:2px; color:var(--gold-light); }
+  .card-arrow { position:absolute; bottom:1.5rem; right:1.5rem; width:36px; height:36px; border:1px solid rgba(201,169,110,0.3); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; }
+  .property-card:hover .card-arrow { background:var(--gold); border-color:var(--gold); }
+  .card-arrow svg { width:14px; height:14px; stroke:var(--gold); transition:stroke 0.3s; }
+  .property-card:hover .card-arrow svg { stroke:var(--charcoal); }
+
+  /* ── FOOTER ── */
+  footer { border-top:1px solid rgba(201,169,110,0.15); padding:3rem 2rem; text-align:center; }
+  .footer-brand { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem; }
+  .footer-copy { font-size:11px; color:var(--text-subtle); letter-spacing:0.05em; line-height:1.8; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  @media(max-width:640px) { .hero-meta{gap:2rem} .cards-grid{grid-template-columns:1fr;gap:1px} section{padding:4rem 1.2rem} }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <div class="nav-brand notranslate">The Living Plus</div>
+  <div id="google_translate_element"></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-ornament"><span class="line"></span><span>Exclusively Curated</span><span class="line"></span></div>
+  <p class="hero-greeting">A private selection, prepared for</p>
+  <h1 class="hero-title">Mr. <span class="accent">Ro</span></h1>
+  <p class="hero-subtitle notranslate">The Living Plus &nbsp;·&nbsp; Bangkok Premium Residences</p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta" id="hero-meta">
+    <div class="hero-meta-item"><div class="num" id="meta-count">—</div><div class="label">Properties</div></div>
+    <div class="hero-meta-item"><div class="num" id="meta-sqm">—</div><div class="label">Sq.m. avg.</div></div>
+    <div class="hero-meta-item"><div class="num" id="meta-price">—</div><div class="label">THB avg.</div></div>
+  </div>
+  <div class="scroll-hint"><span>Explore</span><div class="arrow"></div></div>
+</div>
+
+<!-- MAP -->
+<section id="map-zone">
+  <div class="section-label"><span class="line"></span><span>Location</span></div>
+  <h2 class="section-title">Where you will live</h2>
+  <div class="map-wrap">
+    <!-- ████ วาง Google My Maps iframe ตรงนี้ ████ -->
+    <!-- <iframe src="YOUR_GOOGLE_MY_MAPS_URL" width="100%" height="420" frameborder="0" allowfullscreen loading="lazy"></iframe> -->
+    <div class="map-placeholder">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      <p>Google My Maps</p>
+      <div class="embed-hint">[ วาง iframe embed URL จาก Google My Maps ตรงนี้ ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section id="properties" style="padding-top:0;">
+  <div class="section-label"><span class="line"></span><span>Selected Units</span></div>
+  <h2 class="section-title">Properties for you</h2>
+  <div class="cards-grid" id="cards-grid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand notranslate">The Living Plus</div>
+  <div class="footer-copy notranslate">© 2026 THE LIVING PLUS. All rights reserved.<br>Operated by K Corp Co., Ltd.</div>
+</footer>
+
+<script>
+// ── BUILD CARDS FROM ROOMS_DATA ────────────────────────────────────────────
+const grid = document.getElementById('cards-grid');
+const visible = ROOMS_DATA.filter(r => r.price !== '');
+
+// Hero stats
+document.getElementById('meta-count').textContent = visible.length || '—';
+if (visible.length) {
+  const avgSqm = Math.round(visible.reduce((s,r) => s + parseFloat((r.sqm||'0').replace(/,/g,'')), 0) / visible.length);
+  document.getElementById('meta-sqm').textContent = isNaN(avgSqm) ? '—' : avgSqm;
+  const prices = visible.map(r => parseFloat((r.price||'0').replace(/,/g,''))).filter(p => p > 0);
+  const avgPrice = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length) : 0;
+  document.getElementById('meta-price').textContent = avgPrice ? (avgPrice/1000000).toFixed(1)+'M' : '—';
+}
+
+// Cards
+visible.forEach(room => {
+  const a = document.createElement('a');
+  a.className = 'property-card';
+  a.href = room.file;
+
+  const imgHTML = room.cover
+    ? `<img class="card-img" src="${room.cover}" alt="${room.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+       <div class="card-img-placeholder" style="display:none;">${room.name}</div>`
+    : `<div class="card-img-placeholder">${room.name}</div>`;
+
+  a.innerHTML = `
+    ${imgHTML}
+    <div class="card-body">
+      <div class="card-tag notranslate">${room.type}</div>
+      <div class="card-name notranslate">${room.name}</div>
+      <div class="card-specs">
+        <div class="card-spec"><span class="val">${room.sqm}</span><span class="lbl">SQ.M.</span></div>
+        <div class="card-spec"><span class="val">${room.pricePerSqm}</span><span class="lbl">THB / SQ.M.</span></div>
+      </div>
+      <div class="card-price"><span class="currency">฿</span>${room.price}</div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+    </div>`;
+  grid.appendChild(a);
+});
+
+if (visible.length === 0) {
+  grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--text-muted);font-size:13px;letter-spacing:0.1em;border:1px dashed rgba(201,169,110,0.2);">ยังไม่มีทรัพย์ที่แสดง — กรอกข้อมูลใน admin.html แล้ว generate rooms-data.js</div>`;
+}
+</script>
+
+<!-- ████████████████████████████████████████████████
+     🌐 DEFAULT LANGUAGE ON PAGE LOAD
+     เปลี่ยนภาษา default ตรงนี้ที่เดียว:
+       'ja'  = ญี่ปุ่น
+       'en'  = อังกฤษ
+       ''    = ไทย (ปิด translate / ภาษาต้นฉบับ)
+     ████████████████████████████████████████████████ -->
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var select = document.querySelector('.goog-te-combo');
+    if (select) { select.value = 'ja'; select.dispatchEvent(new Event('change')); }
+  }, 800);
+});
+</script>
+
+</body>
+</html>

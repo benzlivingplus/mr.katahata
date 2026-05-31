@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — THE LIVING PLUS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:#0f0f0f; color:#e8e8e8; min-height:100vh; }
+
+.topbar {
+  background:#161616; border-bottom:1px solid #2a2a2a;
+  padding:0 2rem; height:52px;
+  display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.topbar-brand { font-size:13px; font-weight:500; letter-spacing:0.15em; color:#C9A96E; text-transform:uppercase; }
+.topbar-right { display:flex; gap:10px; align-items:center; }
+
+.layout { display:grid; grid-template-columns:220px 1fr; min-height:calc(100vh - 52px); }
+
+.sidebar {
+  background:#141414; border-right:1px solid #2a2a2a;
+  padding:1.5rem 0;
+}
+.sidebar-section { font-size:10px; letter-spacing:0.2em; color:#555; text-transform:uppercase; padding:0 1.2rem; margin-bottom:0.5rem; margin-top:1.2rem; }
+.room-item {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 1.2rem; cursor:pointer; font-size:13px; color:#aaa;
+  border-left:2px solid transparent; transition:all 0.15s;
+}
+.room-item:hover { background:#1a1a1a; color:#e8e8e8; }
+.room-item.active { background:#1e1a13; color:#C9A96E; border-left-color:#C9A96E; }
+.room-badge {
+  font-size:10px; padding:2px 7px; border-radius:10px;
+  background:#2a2a2a; color:#666;
+}
+.room-badge.filled { background:#1e3a1e; color:#4caf50; }
+
+.main { padding:2rem; overflow-y:auto; }
+.page { display:none; }
+.page.active { display:block; }
+
+/* ── FORM ── */
+.form-title { font-size:18px; font-weight:500; margin-bottom:0.3rem; }
+.form-sub { font-size:13px; color:#666; margin-bottom:2rem; }
+
+.section-block {
+  background:#161616; border:1px solid #2a2a2a; border-radius:8px;
+  padding:1.5rem; margin-bottom:1.2rem;
+}
+.section-block h3 {
+  font-size:11px; letter-spacing:0.2em; color:#C9A96E; text-transform:uppercase;
+  margin-bottom:1.2rem; display:flex; align-items:center; gap:8px;
+}
+.section-block h3::after { content:''; flex:1; height:1px; background:#2a2a2a; }
+
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.field-row.full { grid-template-columns:1fr; }
+.field-row.three { grid-template-columns:1fr 1fr 1fr; }
+
+.field label { font-size:11px; color:#666; letter-spacing:0.05em; display:block; margin-bottom:5px; text-transform:uppercase; }
+.field input, .field textarea, .field select {
+  width:100%; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:6px;
+  color:#e8e8e8; font-family:'DM Sans',sans-serif; font-size:13px;
+  padding:8px 10px; transition:border-color 0.15s;
+}
+.field input:focus, .field textarea:focus { outline:none; border-color:#C9A96E; }
+.field input.has-value { border-color:#2d3d2d; }
+.field textarea { resize:vertical; min-height:80px; line-height:1.6; }
+
+/* URL converter inline */
+.url-row { display:flex; gap:6px; }
+.url-row input { flex:1; }
+.btn-convert {
+  padding:8px 12px; background:#1e1a13; border:1px solid #C9A96E40;
+  color:#C9A96E; border-radius:6px; font-size:11px; cursor:pointer;
+  white-space:nowrap; transition:background 0.15s; letter-spacing:0.05em;
+}
+.btn-convert:hover { background:#2a2213; }
+.url-hint { font-size:10px; color:#444; margin-top:4px; font-family:monospace; }
+
+/* Photos array builder */
+.photos-list { display:flex; flex-direction:column; gap:6px; margin-bottom:8px; }
+.photo-row { display:flex; gap:6px; align-items:center; }
+.photo-row input { flex:1; }
+.btn-icon {
+  width:32px; height:32px; border-radius:6px; border:1px solid #2a2a2a;
+  background:#1a1a1a; color:#666; cursor:pointer; font-size:16px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:all 0.15s;
+}
+.btn-icon:hover { border-color:#555; color:#e8e8e8; }
+.btn-icon.danger:hover { border-color:#c0392b; color:#c0392b; }
+.btn-add {
+  padding:7px 14px; background:transparent; border:1px dashed #333;
+  color:#555; border-radius:6px; font-size:12px; cursor:pointer;
+  transition:all 0.15s; width:100%; text-align:left;
+}
+.btn-add:hover { border-color:#C9A96E40; color:#C9A96E; }
+
+/* Buttons */
+.btn { padding:9px 20px; border-radius:6px; font-size:13px; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:500; transition:all 0.15s; border:1px solid; }
+.btn-primary { background:#C9A96E; border-color:#C9A96E; color:#0f0f0f; }
+.btn-primary:hover { background:#d4b87e; }
+.btn-secondary { background:transparent; border-color:#333; color:#aaa; }
+.btn-secondary:hover { border-color:#555; color:#e8e8e8; }
+.btn-danger { background:transparent; border-color:#c0392b40; color:#c0392b; }
+.btn-danger:hover { background:#c0392b20; }
+
+.action-bar { display:flex; gap:10px; justify-content:flex-end; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #2a2a2a; }
+
+/* ── GENERATE PAGE ── */
+.output-box {
+  background:#0a0a0a; border:1px solid #2a2a2a; border-radius:8px;
+  padding:1.5rem; font-family:monospace; font-size:12px; line-height:1.7;
+  color:#a8e6cf; white-space:pre; overflow-x:auto; max-height:60vh; overflow-y:auto;
+}
+.status-bar {
+  display:flex; gap:8px; align-items:center; margin-bottom:1rem;
+  font-size:13px; color:#666;
+}
+.dot { width:8px; height:8px; border-radius:50%; background:#333; }
+.dot.green { background:#4caf50; }
+.dot.amber { background:#C9A96E; }
+
+/* ── URL CONVERTER PAGE ── */
+.converter-tabs { display:flex; gap:4px; margin-bottom:1.5rem; }
+.tab-btn { padding:6px 14px; border-radius:6px; border:1px solid #2a2a2a; background:transparent; color:#666; font-size:12px; cursor:pointer; transition:all 0.15s; }
+.tab-btn.active { background:#1e1a13; border-color:#C9A96E40; color:#C9A96E; }
+
+.conv-area { background:#161616; border:1px solid #2a2a2a; border-radius:8px; padding:1.5rem; }
+.big-input { width:100%; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:6px; color:#e8e8e8; font-family:monospace; font-size:12px; padding:10px 12px; min-height:120px; resize:vertical; }
+.big-input:focus { outline:none; border-color:#C9A96E; }
+.big-output { width:100%; background:#0a0a0a; border:1px solid #2a2a2a; border-radius:6px; color:#a8e6cf; font-family:monospace; font-size:12px; padding:10px 12px; min-height:80px; resize:vertical; }
+.conv-btn-row { display:flex; gap:8px; margin:10px 0; }
+
+@media(max-width:700px) {
+  .layout { grid-template-columns:1fr; }
+  .sidebar { display:none; }
+  .field-row { grid-template-columns:1fr; }
+  .field-row.three { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">The Living Plus · Admin</div>
+  <div class="topbar-right">
+    <button class="btn btn-secondary" onclick="showPage('converter')" style="font-size:12px;padding:6px 14px;">URL Converter</button>
+    <button class="btn btn-primary" onclick="showPage('generate')" style="font-size:12px;padding:6px 14px;">Generate rooms-data.js</button>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">Rooms</div>
+    <div id="sidebar-rooms"></div>
+    <div class="sidebar-section" style="margin-top:1.5rem;">Tools</div>
+    <div class="room-item" onclick="showPage('converter')">URL Converter</div>
+    <div class="room-item" onclick="showPage('generate')">Generate JS</div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main-content">
+
+    <!-- ROOM FORM PAGES (generated by JS) -->
+    <div id="room-pages"></div>
+
+    <!-- URL CONVERTER PAGE -->
+    <div class="page" id="page-converter">
+      <div class="form-title">URL Converter</div>
+      <div class="form-sub">แปลง Google Drive link ให้ใช้งานได้ในเว็บ</div>
+
+      <div class="converter-tabs">
+        <button class="tab-btn active" onclick="setConvTab('single',this)">Single</button>
+        <button class="tab-btn" onclick="setConvTab('batch',this)">Batch</button>
+        <button class="tab-btn" onclick="setConvTab('code',this)">Code Array</button>
+      </div>
+
+      <div class="conv-area">
+        <div id="conv-single">
+          <div class="field"><label>วาง Google Drive URL</label>
+            <div class="url-row">
+              <input type="text" id="cs-input" placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=drive_link" onkeydown="if(event.key==='Enter')doConvSingle()">
+              <button class="btn-convert" onclick="doConvSingle()">Convert</button>
+            </div>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>URL ที่ใช้งานได้</label>
+            <div class="url-row">
+              <input type="text" id="cs-output" readonly placeholder="ผลลัพธ์จะแสดงตรงนี้">
+              <button class="btn-convert" onclick="copyText('cs-output')">Copy</button>
+            </div>
+          </div>
+          <div class="url-hint" id="cs-status"></div>
+        </div>
+
+        <div id="conv-batch" style="display:none;">
+          <div class="field"><label>วางหลาย URL (คั่นด้วย comma หรือขึ้นบรรทัดใหม่)</label>
+            <textarea class="big-input" id="cb-input" placeholder="https://drive.google.com/file/d/ID1/view&#10;https://drive.google.com/file/d/ID2/view"></textarea>
+          </div>
+          <div class="conv-btn-row">
+            <button class="btn btn-primary" onclick="doConvBatch()">Convert</button>
+            <button class="btn btn-secondary" onclick="copyText('cb-output')">Copy output</button>
+            <span style="font-size:12px;color:#666;" id="cb-status"></span>
+          </div>
+          <textarea class="big-output" id="cb-output" readonly></textarea>
+        </div>
+
+        <div id="conv-code" style="display:none;">
+          <div class="field"><label>วาง URLs → ได้ code array วางใน photos:[] ได้เลย</label>
+            <textarea class="big-input" id="cc-input" placeholder="วาง URL ทั้งหมดตรงนี้"></textarea>
+          </div>
+          <div class="conv-btn-row">
+            <button class="btn btn-primary" onclick="doConvCode()">Convert</button>
+            <button class="btn btn-secondary" onclick="copyText('cc-output')">Copy output</button>
+            <span style="font-size:12px;color:#666;" id="cc-status"></span>
+          </div>
+          <textarea class="big-output" id="cc-output" readonly style="min-height:120px;"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- GENERATE PAGE -->
+    <div class="page" id="page-generate">
+      <div class="form-title">Generate rooms-data.js</div>
+      <div class="form-sub">กด Generate แล้ว copy ไฟล์ไปวางใน GitHub ได้เลย</div>
+
+      <div class="status-bar">
+        <div class="dot" id="gen-dot"></div>
+        <span id="gen-status">กรอกข้อมูลห้องก่อนแล้วกด Generate</span>
+      </div>
+
+      <div class="conv-btn-row">
+        <button class="btn btn-primary" onclick="generateJS()">Generate rooms-data.js</button>
+        <button class="btn btn-secondary" onclick="copyText('gen-output')">Copy ทั้งหมด</button>
+        <button class="btn btn-secondary" onclick="downloadJS()">Download ไฟล์</button>
+      </div>
+      <div class="output-box" id="gen-output">// กด Generate เพื่อสร้างไฟล์</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+const ROOM_COUNT = 10;
+const roomData = {};
+for (let i = 1; i <= ROOM_COUNT; i++) {
+  roomData[i] = {
+    name: `Room ${i}`, type: 'Condominium · Bangkok · For Sale',
+    price: '', sqm: '', pricePerSqm: '', facilityFee: '',
+    floor: '', view: '', bedBath: '', btsDistance: '',
+    cover: '', description: '',
+    travelCarPhoto: '', travelCarCaption: `🚗 By car`,
+    travelWalkCaption: `🚶 On foot · BTS`,
+    travelWalkPhotos: ['','',''],
+    videoId: '',
+  };
+}
+if (roomData[1]) {
+  roomData[1].price = '3,900,000';
+  roomData[1].sqm = '40';
+  roomData[1].pricePerSqm = '97,500';
+  roomData[1].cover = 'https://drive.google.com/thumbnail?id=1QjK_nPsXd0-Yye24kjeD0s35xnJCbDUI&sz=w800';
+}
+
+let currentRoom = 1;
+
+// ── BUILD SIDEBAR ──────────────────────────────────────────────────────────
+function buildSidebar() {
+  const el = document.getElementById('sidebar-rooms');
+  el.innerHTML = '';
+  for (let i = 1; i <= ROOM_COUNT; i++) {
+    const filled = roomData[i].price !== '';
+    const div = document.createElement('div');
+    div.className = 'room-item' + (i === currentRoom ? ' active' : '');
+    div.id = `sidebar-room-${i}`;
+    div.onclick = () => showRoom(i);
+    div.innerHTML = `Room ${i} <span class="room-badge ${filled?'filled':''}">${filled?'✓':'—'}</span>`;
+    el.appendChild(div);
+  }
+}
+
+// ── BUILD ROOM FORMS ───────────────────────────────────────────────────────
+function buildForms() {
+  const container = document.getElementById('room-pages');
+  for (let i = 1; i <= ROOM_COUNT; i++) {
+    const div = document.createElement('div');
+    div.className = 'page';
+    div.id = `page-room-${i}`;
+    div.innerHTML = roomFormHTML(i);
+    container.appendChild(div);
+  }
+}
+
+function roomFormHTML(i) {
+  return `
+  <div class="form-title">Room ${i}</div>
+  <div class="form-sub">ข้อมูลที่แสดงบน index.html (card) และ rooms-data.js</div>
+
+  <div class="section-block">
+    <h3>ข้อมูลพื้นฐาน</h3>
+    <div class="field-row">
+      <div class="field"><label>ราคา (ไม่ต้องใส่ ฿)</label>
+        <input type="text" placeholder="3,900,000" id="r${i}-price" oninput="save(${i},'price',this.value)"></div>
+      <div class="field"><label>ขนาด SQ.M.</label>
+        <input type="text" placeholder="40" id="r${i}-sqm" oninput="save(${i},'sqm',this.value)"></div>
+    </div>
+    <div class="field-row three">
+      <div class="field"><label>ราคา / SQ.M.</label>
+        <input type="text" placeholder="97,500" id="r${i}-pricePerSqm" oninput="save(${i},'pricePerSqm',this.value)"></div>
+      <div class="field"><label>Facility Fee / SQ.M.</label>
+        <input type="text" placeholder="50" id="r${i}-facilityFee" oninput="save(${i},'facilityFee',this.value)"></div>
+      <div class="field"><label>BTS Distance</label>
+        <input type="text" placeholder="350 m" id="r${i}-btsDistance" oninput="save(${i},'btsDistance',this.value)"></div>
+    </div>
+    <div class="field-row three">
+      <div class="field"><label>Floor</label>
+        <input type="text" placeholder="12" id="r${i}-floor" oninput="save(${i},'floor',this.value)"></div>
+      <div class="field"><label>Bed / Bath</label>
+        <input type="text" placeholder="1 / 1" id="r${i}-bedBath" oninput="save(${i},'bedBath',this.value)"></div>
+      <div class="field"><label>View</label>
+        <input type="text" placeholder="City View" id="r${i}-view" oninput="save(${i},'view',this.value)"></div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>รูปปก (แสดงบน index card)</h3>
+    <div class="field"><label>Google Drive URL → แปลงอัตโนมัติ</label>
+      <div class="url-row">
+        <input type="text" placeholder="https://drive.google.com/file/d/FILE_ID/view" id="r${i}-cover-raw"
+          oninput="autoConvert(${i},'cover',this.value)">
+        <button class="btn-convert" onclick="autoConvert(${i},'cover',document.getElementById('r${i}-cover-raw').value)">Convert</button>
+      </div>
+      <input type="text" id="r${i}-cover" readonly style="margin-top:6px;color:#a8e6cf;"
+        placeholder="URL ที่แปลงแล้วจะแสดงตรงนี้">
+      <div class="url-hint">วาง link จาก Google Drive แล้วกด Convert — ระบบแปลงให้อัตโนมัติ</div>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>รายละเอียดห้อง (ภาษาไทย)</h3>
+    <div class="field full">
+      <label>คำอธิบาย — ถ้าว่างจะซ่อน section นี้</label>
+      <textarea placeholder="ห้องชุดพักอาศัย..." id="r${i}-description" oninput="save(${i},'description',this.value)"></textarea>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>การเดินทาง</h3>
+    <div class="field-row">
+      <div class="field"><label>Caption รถยนต์</label>
+        <input type="text" id="r${i}-travelCarCaption" oninput="save(${i},'travelCarCaption',this.value)"></div>
+      <div class="field"><label>Caption เดินเท้า/BTS</label>
+        <input type="text" id="r${i}-travelWalkCaption" oninput="save(${i},'travelWalkCaption',this.value)"></div>
+    </div>
+    <div class="field"><label>รูปรถยนต์ (1 รูป)</label>
+      <div class="url-row">
+        <input type="text" placeholder="Drive URL" id="r${i}-travelCarPhoto-raw"
+          oninput="autoConvert(${i},'travelCarPhoto',this.value)">
+        <button class="btn-convert" onclick="autoConvert(${i},'travelCarPhoto',document.getElementById('r${i}-travelCarPhoto-raw').value)">Convert</button>
+      </div>
+      <input type="text" id="r${i}-travelCarPhoto" readonly style="margin-top:6px;color:#a8e6cf;" placeholder="URL ที่แปลงแล้ว">
+    </div>
+    <div class="field" style="margin-top:10px;"><label>รูปเดินเท้า/BTS (กดแล้ว pop-up slider)</label>
+      <div class="photos-list" id="r${i}-walk-list"></div>
+      <button class="btn-add" onclick="addWalkPhoto(${i})">+ เพิ่มรูป</button>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>YouTube Video</h3>
+    <div class="field"><label>Video ID เท่านั้น — ถ้าว่างจะซ่อน section</label>
+      <input type="text" placeholder="dQw4w9WgXcQ" id="r${i}-videoId" oninput="save(${i},'videoId',this.value)">
+      <div class="url-hint">เช่น URL: youtube.com/watch?v=<b>dQw4w9WgXcQ</b> → ใส่แค่ dQw4w9WgXcQ</div>
+    </div>
+  </div>
+
+  <div class="action-bar">
+    <button class="btn btn-secondary" onclick="clearRoom(${i})">Clear ทั้งหมด</button>
+    <button class="btn btn-primary" onclick="saveAndNext(${i})">บันทึก ${i < ROOM_COUNT ? '→ Room '+(i+1) : '→ Generate'}</button>
+  </div>`;
+}
+
+// ── URL CONVERTER ──────────────────────────────────────────────────────────
+function extractId(url) {
+  url = (url||'').trim();
+  const m = url.match(/\/d\/([\w\-_]+)/);
+  if (m) return m[1];
+  const m2 = url.match(/id=([\w\-_]+)/);
+  if (m2) return m2[1];
+  if (/^[\w\-_]{20,}$/.test(url)) return url;
+  return null;
+}
+function toThumb(id) { return `https://drive.google.com/thumbnail?id=${id}&sz=w1200`; }
+function autoConvert(roomIdx, field, rawUrl) {
+  const id = extractId(rawUrl);
+  const outEl = document.getElementById(`r${roomIdx}-${field}`);
+  if (id) {
+    const url = toThumb(id);
+    outEl.value = url;
+    roomData[roomIdx][field] = url;
+    updateSidebarBadge(roomIdx);
+  } else {
+    outEl.value = '';
+    roomData[roomIdx][field] = '';
+  }
+}
+function doConvSingle() {
+  const id = extractId(document.getElementById('cs-input').value);
+  if (!id) { document.getElementById('cs-status').textContent = 'ไม่พบ FILE_ID'; return; }
+  const url = toThumb(id);
+  document.getElementById('cs-output').value = url;
+  navigator.clipboard.writeText(url).then(() => {
+    document.getElementById('cs-status').textContent = 'Copied!';
+    setTimeout(() => document.getElementById('cs-status').textContent = '', 2000);
+  });
+}
+function parseUrls(text) { return text.split(/[\n,]+/).map(s=>s.trim()).filter(Boolean); }
+function doConvBatch() {
+  const urls = parseUrls(document.getElementById('cb-input').value);
+  const out = []; let fail=0;
+  urls.forEach(u => { const id=extractId(u); if(id) out.push(toThumb(id)); else fail++; });
+  document.getElementById('cb-output').value = out.join('\n');
+  document.getElementById('cb-status').textContent = `${out.length} URLs${fail?` (${fail} ไม่สำเร็จ)`:''}`;
+}
+function doConvCode() {
+  const urls = parseUrls(document.getElementById('cc-input').value);
+  const out = []; let fail=0;
+  urls.forEach(u => { const id=extractId(u); if(id) out.push(`  "${toThumb(id)}",`); else fail++; });
+  document.getElementById('cc-output').value = out.join('\n');
+  document.getElementById('cc-status').textContent = `${out.length} URLs${fail?` (${fail} ไม่สำเร็จ)`:''}`;
+}
+function setConvTab(tab, btn) {
+  ['single','batch','code'].forEach(t => {
+    document.getElementById('conv-'+t).style.display = t===tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── SAVE / LOAD ────────────────────────────────────────────────────────────
+function save(i, field, value) {
+  roomData[i][field] = value;
+  updateSidebarBadge(i);
+}
+
+function updateSidebarBadge(i) {
+  const el = document.getElementById(`sidebar-room-${i}`);
+  if (!el) return;
+  const filled = roomData[i].price !== '';
+  el.innerHTML = `Room ${i} <span class="room-badge ${filled?'filled':''}">${filled?'✓':'—'}</span>`;
+}
+
+function loadForm(i) {
+  const d = roomData[i];
+  const fields = ['price','sqm','pricePerSqm','facilityFee','floor','bedBath','btsDistance','view','description','videoId','travelCarCaption','travelWalkCaption'];
+  fields.forEach(f => {
+    const el = document.getElementById(`r${i}-${f}`);
+    if (el) el.value = d[f] || '';
+  });
+  // cover
+  const coverEl = document.getElementById(`r${i}-cover`);
+  if (coverEl) coverEl.value = d.cover || '';
+  // travelCarPhoto
+  const tcEl = document.getElementById(`r${i}-travelCarPhoto`);
+  if (tcEl) tcEl.value = d.travelCarPhoto || '';
+  // walk photos
+  buildWalkList(i);
+}
+
+function buildWalkList(i) {
+  const list = document.getElementById(`r${i}-walk-list`);
+  if (!list) return;
+  list.innerHTML = '';
+  (roomData[i].travelWalkPhotos || []).forEach((url, idx) => {
+    const row = document.createElement('div');
+    row.className = 'photo-row';
+    row.innerHTML = `
+      <input type="text" placeholder="Drive URL รูปที่ ${idx+1}" value="${url}"
+        oninput="saveWalkRaw(${i},${idx},this.value)" style="flex:1;">
+      <button class="btn-icon danger" onclick="removeWalk(${i},${idx})" title="ลบ">×</button>`;
+    list.appendChild(row);
+  });
+}
+
+function saveWalkRaw(i, idx, rawUrl) {
+  const id = extractId(rawUrl);
+  roomData[i].travelWalkPhotos[idx] = id ? toThumb(id) : '';
+}
+
+function addWalkPhoto(i) {
+  roomData[i].travelWalkPhotos.push('');
+  buildWalkList(i);
+}
+
+function removeWalk(i, idx) {
+  roomData[i].travelWalkPhotos.splice(idx, 1);
+  buildWalkList(i);
+}
+
+function clearRoom(i) {
+  if (!confirm(`Clear ข้อมูล Room ${i} ทั้งหมด?`)) return;
+  roomData[i] = { name:`Room ${i}`, type:'Condominium · Bangkok · For Sale', price:'', sqm:'', pricePerSqm:'', facilityFee:'', floor:'', view:'', bedBath:'', btsDistance:'', cover:'', description:'', travelCarPhoto:'', travelCarCaption:'🚗 By car', travelWalkCaption:'🚶 On foot · BTS', travelWalkPhotos:[], videoId:'' };
+  loadForm(i);
+  updateSidebarBadge(i);
+}
+
+function saveAndNext(i) {
+  if (i < ROOM_COUNT) showRoom(i + 1);
+  else showPage('generate');
+}
+
+// ── GENERATE ───────────────────────────────────────────────────────────────
+function generateJS() {
+  const lines = [];
+  lines.push(`// ████████████████████████████████████████████████████████████████`);
+  lines.push(`// 📋 ROOMS-DATA.JS — ไฟล์กลาง แก้ที่นี่ที่เดียว`);
+  lines.push(`//    Generated: ${new Date().toLocaleString('th-TH')}`);
+  lines.push(`// ████████████████████████████████████████████████████████████████`);
+  lines.push(``);
+  lines.push(`const ROOMS_DATA = [`);
+  lines.push(``);
+
+  for (let i = 1; i <= ROOM_COUNT; i++) {
+    const d = roomData[i];
+    lines.push(`  // ── ROOM ${i} ──────────────────────────────────────────────────────`);
+    lines.push(`  {`);
+    lines.push(`    file:        "room${i}.html",`);
+    lines.push(`    name:        "${d.name}",`);
+    lines.push(`    type:        "${d.type}",`);
+    lines.push(`    price:       "${d.price}",`);
+    lines.push(`    sqm:         "${d.sqm}",`);
+    lines.push(`    pricePerSqm: "${d.pricePerSqm}",`);
+    lines.push(`    cover:       "${d.cover}",`);
+    lines.push(`  },`);
+    lines.push(``);
+  }
+
+  lines.push(`];`);
+  const out = lines.join('\n');
+  document.getElementById('gen-output').textContent = out;
+  const filled = Object.values(roomData).filter(d => d.price).length;
+  document.getElementById('gen-dot').className = 'dot ' + (filled > 0 ? 'green' : 'amber');
+  document.getElementById('gen-status').textContent = `${filled} ห้องมีข้อมูล · ${ROOM_COUNT - filled} ห้องว่าง (จะซ่อนบน index)`;
+}
+
+function downloadJS() {
+  generateJS();
+  const text = document.getElementById('gen-output').textContent;
+  const blob = new Blob([text], { type: 'text/javascript' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rooms-data.js';
+  a.click();
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────────────
+function showRoom(i) {
+  currentRoom = i;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-room-${i}`).classList.add('active');
+  document.querySelectorAll('.room-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`sidebar-room-${i}`)?.classList.add('active');
+  loadForm(i);
+}
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${name}`).classList.add('active');
+  document.querySelectorAll('.room-item').forEach(el => el.classList.remove('active'));
+  if (name === 'generate') generateJS();
+}
+
+function copyText(id) {
+  const el = document.getElementById(id);
+  const text = el.value || el.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = el.style.borderColor;
+    el.style.borderColor = '#4caf50';
+    setTimeout(() => el.style.borderColor = orig, 1200);
+  });
+}
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+buildForms();
+buildSidebar();
+showRoom(1);
+</script>
+</body>
+</html>
