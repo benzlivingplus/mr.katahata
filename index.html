@@ -168,11 +168,10 @@ const grid = document.getElementById('cards-grid');
   
 const CARDS_PER_PAGE = 2;
 let currentPage = 1;
-const visible = allVisible.slice(0, CARDS_PER_PAGE);
+const allVisible = ROOMS_DATA.filter(r => r.price !== '');
 const totalPages = Math.ceil(allVisible.length / CARDS_PER_PAGE);
-const visible = allVisible.slice((currentPage-1)*CARDS_PER_PAGE, currentPage*CARDS_PER_PAGE);
 
-visible.forEach(room => {
+allVisible.slice(0, CARDS_PER_PAGE).forEach(room => {
   const a = document.createElement('a');
   a.className = 'property-card';
   a.href = room.file;
@@ -212,7 +211,7 @@ if (totalPages > 1) {
   // Dots
   for (let i = 1; i <= totalPages; i++) {
     const dot = document.createElement('div');
-    dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===currentPage?'var(--gold)':'var(--charcoal-border)'};cursor:pointer;transition:background 0.2s;`;
+    dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===currentPage?'#C9A96E':'#555555'};cursor:pointer;transition:background 0.2s;`;
     dot.onclick = () => window.location.href = `?page=${i}`;
     pg.appendChild(dot);
   }
@@ -243,7 +242,7 @@ if (totalPages > 1) {
       });
       // update dots
       document.querySelectorAll('#pagination div').forEach((d,i) => {
-        d.style.background = (i+1 === currentPage) ? 'var(--gold)' : '#383838';
+        d.style.background = (i+1 === currentPage) ? '#C9A96E' : '#555555';
       });
     }
   }, {passive:false});
