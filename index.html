@@ -224,9 +224,10 @@ if (totalPages > 1) {
   grid.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
   grid.addEventListener('touchend', e => {
     const dx = startX - e.changedTouches[0].clientX;
+      e.preventDefault();
     if (dx > 60 && currentPage < totalPages) window.location.href = `?page=${currentPage+1}`;
     if (dx < -60 && currentPage > 1) window.location.href = `?page=${currentPage-1}`;
-  }, {passive:true});
+  }, {passive:false});
 }
   
 if (visible.length === 0) {
