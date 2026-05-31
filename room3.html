@@ -148,6 +148,11 @@ function googleTranslateElementInit() {
   .travel-caption { padding: 1rem 1.2rem; font-size: 12px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; border-top: 1px solid var(--charcoal-border); display: flex; align-items: center; justify-content: space-between; }
   .travel-badge { font-size: 10px; color: var(--gold); opacity: 0.7; letter-spacing: 0.05em; }
 
+/* ── MAP ── */
+  .map-section { margin-bottom: 4rem; }
+  .map-wrap { border-radius: 4px; overflow: hidden; border: 1px solid var(--charcoal-border); }
+  .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+  
   /* ── VIDEO ── */
   .video-section { margin-bottom: 4rem; }
   .video-wrap { position: relative; aspect-ratio: 16/9; background: var(--charcoal-mid); border: 1px solid var(--charcoal-border); overflow: hidden; }
@@ -260,6 +265,10 @@ const ROOM = {
   // ถ้าไม่กรอก (ปล่อยว่าง "") section นี้จะซ่อนอัตโนมัติ
   // เช่น URL: https://www.youtube.com/watch?v=dQw4w9WgXcQ → videoId = "dQw4w9WgXcQ"
   videoId: "",
+
+  // ── แผนที่ตำแหน่งห้อง ─────────────────────────────
+  // ถ้าว่าง ("") จะซ่อน section อัตโนมัติ
+  mapUrl: "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F&ll=13.715149734375105,100.58781428466135&z=17",
 };
 
 // ── ห้องอื่นๆ — ดึงจาก rooms-data.js อัตโนมัติ ──────────────────────────
@@ -321,12 +330,25 @@ const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
     </p>
   </div>
 
+  <!-- MAP (ซ่อนถ้าไม่มี mapUrl) -->
+  <div class="map-section" id="map-section" style="display:none;">
+    <div class="section-label"><span class="line"></span><span>Location</span></div>
+    <div class="map-wrap" id="room-map-wrap"></div>
+  </div>
+
   <!-- HOW TO GO (ซ่อน section ถ้าไม่มีรูปเลย) -->
   <div class="travel-section" id="travel-section">
     <div class="section-label"><span class="line"></span><span>How to go to Brian Spoke Head Office</span></div>
     <div class="travel-grid" id="travel-grid"></div>
   </div>
 
+// ── MAP ──────────────────────────────────────────────────────────────────────
+if (ROOM.mapUrl) {
+  document.getElementById('map-section').style.display = 'block';
+  document.getElementById('room-map-wrap').innerHTML =
+    `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
+}
+  
   <!-- VIDEO (ซ่อนถ้าไม่มี videoId) -->
   <div class="video-section" id="video-section" style="display:none;">
     <div class="section-label"><span class="line"></span><span>Video Tour</span></div>
