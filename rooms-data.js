@@ -14,6 +14,7 @@ const ROOMS_DATA = [
     type:        "Condominium · Lowrise · Resale",
     price:       "3,900,000",           // ราคา (ไม่ต้องใส่ ฿)
     sqm:         "40",                  // ขนาด (ไม่ต้องใส่ ตร.ม.)
+    bedBath:     "1/1",
     pricePerSqm: "97,500",              // ราคา/ตร.ม. (ไม่ต้องใส่ ฿)
     cover: "https://drive.google.com/thumbnail?id=1QjK_nPsXd0-Yye24kjeD0s35xnJCbDUI&sz=w1200",
     // ถ้า cover ว่าง ("") → card จะซ่อนรูปปก แต่ยังแสดง card
