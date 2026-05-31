@@ -109,7 +109,7 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-  @media(max-width:640px) { .cards-grid{grid-template-columns:1fr 1fr;gap:8px} section{padding:4rem 1.2rem} }
+  @media(max-width:640px) { .cards-grid{grid-template-columns:1fr;gap:8px} section{padding:4rem 1.2rem} }
 </style>
 </head>
 <body>
@@ -166,7 +166,7 @@ if (MAP_EMBED_URL && MAP_EMBED_URL.trim() !== '') {
 // ── CARDS FROM ROOMS_DATA ─────────────────────────────────────────────────
 const grid = document.getElementById('cards-grid');
   
-const CARDS_PER_PAGE = 10;
+const CARDS_PER_PAGE = 2;
 const urlParams = new URLSearchParams(window.location.search);
 const currentPage = parseInt(urlParams.get('page') || '1');
 const allVisible = ROOMS_DATA.filter(r => r.price !== '');
