@@ -148,6 +148,11 @@ function googleTranslateElementInit() {
   .travel-caption { padding: 1rem 1.2rem; font-size: 12px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; border-top: 1px solid var(--charcoal-border); display: flex; align-items: center; justify-content: space-between; }
   .travel-badge { font-size: 10px; color: var(--gold); opacity: 0.7; letter-spacing: 0.05em; }
 
+/* ── MAP ── */
+.map-section { margin-bottom: 4rem; }
+.map-wrap { border-radius: 4px; overflow: hidden; border: 1px solid var(--charcoal-border); }
+.map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+  
   /* ── VIDEO ── */
   .video-section { margin-bottom: 4rem; }
   .video-wrap { position: relative; aspect-ratio: 16/9; background: var(--charcoal-mid); border: 1px solid var(--charcoal-border); overflow: hidden; }
@@ -266,6 +271,12 @@ const ROOM = {
   // ถ้าไม่กรอก (ปล่อยว่าง "") section นี้จะซ่อนอัตโนมัติ
   // เช่น URL: https://www.youtube.com/watch?v=dQw4w9WgXcQ → videoId = "dQw4w9WgXcQ"
   videoId: "",
+
+// ── แผนที่ตำแหน่งห้อง ─────────────────────────────
+// ใส่ embed URL พร้อม &ll= และ &z= เพื่อซูมไปที่หมุดห้องนี้
+// ถ้าว่าง ("") จะซ่อน section อัตโนมัติ
+mapUrl: "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F",  // ← วาง URL ตรงนี้
+  
 };
 
 // ── ห้องอื่นๆ — ดึงจาก rooms-data.js อัตโนมัติ ──────────────────────────
@@ -339,6 +350,12 @@ const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
     <div class="video-wrap" id="video-wrap"></div>
   </div>
 
+<!-- MAP (ซ่อนถ้าไม่มี mapUrl) -->
+<div class="map-section" id="map-section" style="display:none;">
+  <div class="section-label"><span class="line"></span><span>Location</span></div>
+  <div class="map-wrap" id="room-map-wrap"></div>
+</div>
+  
   <!-- RELATED ROOMS SLIDER -->
   <div class="related-section" id="related-section" style="display:none;">
     <div class="slider-controls">
@@ -489,6 +506,13 @@ if (!hasCar && !hasWalk) {
   travelGrid.appendChild(dw);
 }
 
+ // ── MAP (ซ่อนถ้าไม่มี mapUrl) ──────────────────────────────────────────────
+if (ROOM.mapUrl) {
+  document.getElementById('map-section').style.display = 'block';
+  document.getElementById('room-map-wrap').innerHTML =
+    `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
+} 
+  
 // ── VIDEO (ซ่อนถ้าไม่มี videoId) ─────────────────────────────────────────────
 if (ROOM.videoId) {
   document.getElementById('video-section').style.display = 'block';
