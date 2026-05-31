@@ -30,7 +30,7 @@ const ROOMS_DATA = [
     sqm:         "60",
     pricePerSqm: "81,600",
     bedBath:     "2/1",
-    cover:       "",
+    cover:       "https://drive.google.com/thumbnail?id=1zTrGfByha2XsZSEYNW0SI9-Nk2Aaqebq&sz=w1200",
   },
 
   // ── ROOM 3 ──────────────────────────────────────────────────────
