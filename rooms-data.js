@@ -25,10 +25,11 @@ const ROOMS_DATA = [
   {
     file:        "room2.html",
     name:        "Room 2",
-    type:        "Condominium · Bangkok · For Sale",
-    price:       "",                    // ← ว่าง = ซ่อน card
-    sqm:         "",
-    pricePerSqm: "",
+    type:        "Condominium · Lowrise · Resale",
+    price:       "4,900,000",                    // ← ว่าง = ซ่อน card
+    sqm:         "60",
+    pricePerSqm: "81,600",
+    bedBath:     "2/1",
     cover:       "",
   },
 
