@@ -270,17 +270,17 @@ const ROOM = {
   videoId: "",
 };
 
-// ── ห้องอื่นๆ สำหรับ slider ด้านล่าง ──────────────────────────────────────
-// เพิ่ม/ลบได้ตามจำนวนห้องที่มี ถ้าไม่มีห้องอื่น ปล่อย [] ว่างไว้ได้เลย
-const OTHER_ROOMS = [
-  // {
-  //   name:  "Room 2",
-  //   price: "4,200,000",
-  //   sqm:   "45",
-  //   cover: "https://drive.google.com/thumbnail?id=XXXXX&sz=w1200",
-  //   link:  "room2.html"
-  // },
-];
+// ── ห้องอื่นๆ — ดึงจาก rooms-data.js อัตโนมัติ ──────────────────────────
+const currentFile = location.pathname.split('/').pop() || 'room1.html';
+const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
+  ? ROOMS_DATA.filter(r => r.file !== currentFile && r.price !== '').map(r => ({
+      name:  r.name,
+      price: r.price,
+      sqm:   r.sqm,
+      cover: r.cover,
+      link:  r.file
+    }))
+  : [];
 </script>
 
 <!-- NAV -->
