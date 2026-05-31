@@ -167,9 +167,8 @@ if (MAP_EMBED_URL && MAP_EMBED_URL.trim() !== '') {
 const grid = document.getElementById('cards-grid');
   
 const CARDS_PER_PAGE = 2;
-const urlParams = new URLSearchParams(window.location.search);
-const currentPage = parseInt(urlParams.get('page') || '1');
-const allVisible = ROOMS_DATA.filter(r => r.price !== '');
+let currentPage = 1;
+const visible = allVisible.slice(0, CARDS_PER_PAGE);
 const totalPages = Math.ceil(allVisible.length / CARDS_PER_PAGE);
 const visible = allVisible.slice((currentPage-1)*CARDS_PER_PAGE, currentPage*CARDS_PER_PAGE);
 
@@ -222,11 +221,31 @@ if (totalPages > 1) {
   let startX = 0;
   const grid = document.getElementById('cards-grid');
   grid.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-  grid.addEventListener('touchend', e => {
+  
+ grid.addEventListener('touchend', e => {
     const dx = startX - e.changedTouches[0].clientX;
-      e.preventDefault();
-    if (dx > 60 && currentPage < totalPages) window.location.href = `?page=${currentPage+1}`;
-    if (dx < -60 && currentPage > 1) window.location.href = `?page=${currentPage-1}`;
+    if (Math.abs(dx) > 60) {
+      currentPage = dx > 0
+        ? Math.min(totalPages, currentPage + 1)
+        : Math.max(1, currentPage - 1);
+      const start = (currentPage-1) * CARDS_PER_PAGE;
+      grid.innerHTML = '';
+      allVisible.slice(start, start + CARDS_PER_PAGE).forEach(room => {
+        // re-render cards
+        const a = document.createElement('a');
+        a.className = 'property-card';
+        a.href = room.file;
+        const imgHTML = room.cover
+          ? `<img class="card-img" src="${room.cover}" alt="${room.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="card-img-placeholder" style="display:none;">${room.name}</div>`
+          : `<div class="card-img-placeholder">${room.name}</div>`;
+        a.innerHTML = `${imgHTML}<div class="card-body"><div class="card-tag notranslate">${room.type}</div><div class="card-name notranslate">${room.name}</div><div class="card-info-row"><span class="info-item">${room.sqm} SQ.M.</span><span class="info-sep">|</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M3 11V19M21 11V19M3 11C3 8 6 6 12 6C18 6 21 8 21 11M3 19H21M7 11V19M17 11V19"/></svg><span class="info-item">${room.bedBath?room.bedBath.split('/')[0].trim():'—'}</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M4 12H20M4 12V18H20V12M4 12V8C4 6.9 4.9 6 6 6H10C11.1 6 12 6.9 12 8V12"/></svg><span class="info-item">${room.bedBath?room.bedBath.split('/')[1].trim():'—'}</span><span class="info-sep">|</span><span class="info-price">${room.price} THB</span></div><div class="card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>`;
+        grid.appendChild(a);
+      });
+      // update dots
+      document.querySelectorAll('#pagination div').forEach((d,i) => {
+        d.style.background = (i+1 === currentPage) ? 'var(--gold)' : '#383838';
+      });
+    }
   }, {passive:false});
 }
   
