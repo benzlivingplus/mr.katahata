@@ -398,7 +398,7 @@ document.getElementById('specs-row').innerHTML = [
   { val: ROOM.pricePerSqm, lbl: 'THB / SQ.M.' },
   { val: ROOM.facilityFee, lbl: 'Facility Fee / SQ.M.' },
   { val: ROOM.floor,       lbl: 'Floor' },
-  { val: ROOM.bedBath,     lbl: '🛏 / 🚿' },
+  { val: ROOM.bedBath, lbl: '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-1px;opacity:0.6"><path d="M3 11V19M21 11V19M3 11C3 8 6 6 12 6C18 6 21 8 21 11M3 19H21M7 11V19M17 11V19"/></svg> / <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-1px;opacity:0.6"><path d="M4 12H20M4 12V18H20V12M4 12V8C4 6.9 4.9 6 6 6H10C11.1 6 12 6.9 12 8V12"/></svg>' },
   { val: ROOM.btsDistance, lbl: 'M. to BTS' },
 ].map(s => `<div class="spec-cell"><span class="val">${s.val}</span><span class="lbl">${s.lbl}</span></div>`).join('');
 
