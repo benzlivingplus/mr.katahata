@@ -143,6 +143,7 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   <div class="section-label"><span class="line"></span><span>Selected Units</span></div>
   <h2 class="section-title">Properties for you</h2>
   <div class="cards-grid" id="cards-grid"></div>
+  <div id="pagination" style="display:flex;gap:8px;justify-content:center;margin-top:2rem;"></div>
 </section>
 
 <!-- FOOTER -->
@@ -205,6 +206,17 @@ visible.forEach(room => {
   grid.appendChild(a);
 });
 
+if (totalPages > 1) {
+  const pg = document.getElementById('pagination');
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('a');
+    btn.href = `?page=${i}`;
+    btn.textContent = i;
+    btn.style.cssText = `padding:8px 16px;border:1px solid ${i===currentPage?'var(--gold)':'var(--charcoal-border)'};color:${i===currentPage?'var(--gold)':'var(--text-muted)'};text-decoration:none;font-size:13px;`;
+    pg.appendChild(btn);
+  }
+}
+  
 if (visible.length === 0) {
   grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--text-muted);font-size:13px;letter-spacing:0.1em;border:1px dashed rgba(201,169,110,0.2);">ยังไม่มีทรัพย์ที่แสดง — กรอกข้อมูลใน admin.html แล้ว generate rooms-data.js</div>`;
 }
