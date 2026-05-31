@@ -159,15 +159,7 @@ function googleTranslateElementInit() {
 const grid = document.getElementById('cards-grid');
 const visible = ROOMS_DATA.filter(r => r.price !== '');
 
-// Hero stats
-document.getElementById('meta-count').textContent = visible.length || '—';
-if (visible.length) {
-  const avgSqm = Math.round(visible.reduce((s,r) => s + parseFloat((r.sqm||'0').replace(/,/g,'')), 0) / visible.length);
-  document.getElementById('meta-sqm').textContent = isNaN(avgSqm) ? '—' : avgSqm;
-  const prices = visible.map(r => parseFloat((r.price||'0').replace(/,/g,''))).filter(p => p > 0);
-  const avgPrice = prices.length ? Math.round(prices.reduce((a,b)=>a+b,0)/prices.length) : 0;
-  document.getElementById('meta-price').textContent = avgPrice ? (avgPrice/1000000).toFixed(1)+'M' : '—';
-}
+
 
 // Cards
 visible.forEach(room => {
