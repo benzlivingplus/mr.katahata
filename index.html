@@ -182,9 +182,13 @@ visible.forEach(room => {
       <div class="card-name notranslate">${room.name}</div>
       <div class="card-info-row">
         <span class="info-item">${room.sqm} SQ.M.</span>
-        ${room.bedBath ? `<span class="info-sep">·</span><span class="info-item">${room.bedBath}</span>` : ''}
-        <span class="info-sep">·</span>
-        <span class="info-price">฿${room.price}</span>
+        <span class="info-sep">|</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M3 11V19M21 11V19M3 11C3 8 6 6 12 6C18 6 21 8 21 11M3 19H21M7 11V19M17 11V19"/></svg>
+        <span class="info-item">${room.bedBath ? room.bedBath.split('/')[0].trim() : '—'}</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;flex-shrink:0"><path d="M4 12H20M4 12V18H20V12M4 12V8C4 6.9 4.9 6 6 6H10C11.1 6 12 6.9 12 8V12"/></svg>
+        <span class="info-item">${room.bedBath ? room.bedBath.split('/')[1].trim() : '—'}</span>
+        <span class="info-sep">|</span>
+        <span class="info-price">${room.price} THB</span>
       </div>
       <div class="card-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
