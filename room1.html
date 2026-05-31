@@ -408,8 +408,8 @@ document.getElementById('specs-row').innerHTML = [
   { val: ROOM.pricePerSqm, lbl: 'THB / SQ.M.' },
   { val: ROOM.facilityFee, lbl: 'Facility Fee / SQ.M.' },
   { val: ROOM.floor,       lbl: 'Floor' },
-  { val: ROOM.bedBath,     lbl: 'Bed / Bath' },
-  { val: ROOM.btsDistance, lbl: 'BTS Distance' },
+  { val: ROOM.bedBath,     lbl: '🛏 / 🚿' },
+  { val: ROOM.btsDistance, lbl: 'M. to BTS' },
 ].map(s => `<div class="spec-cell"><span class="val">${s.val}</span><span class="lbl">${s.lbl}</span></div>`).join('');
 
 // ── DESCRIPTION (ซ่อนถ้าว่าง) ────────────────────────────────────────────────
