@@ -206,15 +206,27 @@ visible.forEach(room => {
   grid.appendChild(a);
 });
 
+// ── PAGINATION DOTS + SWIPE ───────────────────────────────────────────────
 if (totalPages > 1) {
   const pg = document.getElementById('pagination');
+  
+  // Dots
   for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('a');
-    btn.href = `?page=${i}`;
-    btn.textContent = i;
-    btn.style.cssText = `padding:8px 16px;border:1px solid ${i===currentPage?'var(--gold)':'var(--charcoal-border)'};color:${i===currentPage?'var(--gold)':'var(--text-muted)'};text-decoration:none;font-size:13px;`;
-    pg.appendChild(btn);
+    const dot = document.createElement('div');
+    dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${i===currentPage?'var(--gold)':'var(--charcoal-border)'};cursor:pointer;transition:background 0.2s;`;
+    dot.onclick = () => window.location.href = `?page=${i}`;
+    pg.appendChild(dot);
   }
+
+  // Swipe left/right
+  let startX = 0;
+  const grid = document.getElementById('cards-grid');
+  grid.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+  grid.addEventListener('touchend', e => {
+    const dx = startX - e.changedTouches[0].clientX;
+    if (dx > 60 && currentPage < totalPages) window.location.href = `?page=${currentPage+1}`;
+    if (dx < -60 && currentPage > 1) window.location.href = `?page=${currentPage-1}`;
+  }, {passive:true});
 }
   
 if (visible.length === 0) {
