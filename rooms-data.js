@@ -53,6 +53,7 @@ const ROOMS_DATA = [
     price:       "3,990,000",
     sqm:         "38.5",
     pricePerSqm: "103,600",
+        bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1kOHyG37GilebNoEsMNtBNxSUFvBc7XhV&sz=w1200",
   },
 
@@ -64,6 +65,7 @@ const ROOMS_DATA = [
     price:       "3,200,000",
     sqm:         "30.48",
     pricePerSqm: "105,000",
+        bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1NMxCH-wM7KyQxuylFBM-9OEgjMrAxOya&sz=w1200",
   },
 
@@ -75,6 +77,7 @@ const ROOMS_DATA = [
     price:       "3,990,000",
     sqm:         "38.56",
     pricePerSqm: "103,600",
+        bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1jyQZunbOUbR0e9cIgfTo_iUQrRZYcr4Q&sz=w1200",
   },
 
@@ -86,6 +89,7 @@ const ROOMS_DATA = [
     price:       "3,700,000",
     sqm:         "29",
     pricePerSqm: "127,500",
+        bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1myLOa3KJ77e9OW8enMRCm45YegRFmwyU&sz=w1200",
   },
 
