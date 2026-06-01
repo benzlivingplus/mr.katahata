@@ -111,7 +111,7 @@ const ROOMS_DATA = [
     type:        "Condominium · Low Rise · Resale",
     price:       "4,200,000",
     sqm:         "29",
-    pricePerSqm: "",
+    pricePerSqm: "144,827",
     cover:       "https://drive.google.com/thumbnail?id=1KefPBm6ZctH80bNVmFQ2CzZTxVCs4TNN&sz=w1200",
   },
 
