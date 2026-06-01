@@ -41,6 +41,7 @@ const ROOMS_DATA = [
     price:       "4,390,000",
     sqm:         "47",
     pricePerSqm: "93,400",
+    bedBath:     "2/1",    
     cover:       "https://drive.google.com/thumbnail?id=1iOhN31oCZQMbwmkoZe3piOGobTCSUoJx&sz=w1200",
   },
 
