@@ -231,6 +231,9 @@ if (visible.length === 0) {
      ████████████████████████████████████████████████ -->
 <script>
 window.addEventListener('load', function() {
+  if (new URLSearchParams(window.location.search).get('page')) {
+    document.getElementById('properties').scrollIntoView({ behavior: 'instant' });
+  }
   setTimeout(function() {
     var select = document.querySelector('.goog-te-combo');
     if (select) { select.value = 'en'; select.dispatchEvent(new Event('change')); }
