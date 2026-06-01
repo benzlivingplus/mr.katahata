@@ -17,23 +17,21 @@ function googleTranslateElementInit() {
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<!-- ████████████████████████████████████████████████
-     📋 ROOMS DATA — ดึงข้อมูลจากไฟล์กลาง
-     ████████████████████████████████████████████████ -->
 <script src="rooms-data.js"></script>
 
 <!-- ╔══════════════════════════════════════════════════╗
      ║  🗺️  วาง Google My Maps URL ตรงนี้             ║
-     ║                                                  ║
-     ║  วิธีได้ URL:                                    ║
-     ║  1. เปิด Google My Maps → แผนที่ที่ต้องการ      ║
-     ║  2. กด Share → Embed on my site                 ║
-     ║  3. Copy URL ใน src="..." มาวางด้านล่าง         ║
-     ║                                                  ║
      ║  ถ้าปล่อยว่าง → section แผนที่จะซ่อนอัตโนมัติ  ║
      ╚══════════════════════════════════════════════════╝ -->
 <script>
-const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F&ll=13.72356653529976,100.56547608379594&z=13"; // ← วาง URL ตรงนี้ระหว่าง "" ครับ
+const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F&ll=13.72356653529976,100.56547608379594&z=13";
+</script>
+
+<!-- ████████████████████████████████████████████████
+     📄 จำนวน card ต่อหน้า — แก้ตรงนี้ที่เดียว
+     ████████████████████████████████████████████████ -->
+<script>
+const CARDS_PER_PAGE = 5;
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,20 +46,14 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'DM Sans',sans-serif; background:var(--charcoal); color:var(--cream); min-height:100vh; overflow-x:hidden; }
-
-  /* ── GOOGLE TRANSLATE ── */
   #google_translate_element { display:inline-block; }
   .goog-te-gadget-simple { background:transparent !important; border:1px solid rgba(201,169,110,0.4) !important; border-radius:3px !important; padding:4px 10px !important; cursor:pointer; }
   .goog-te-gadget-simple span, .goog-te-gadget-simple .goog-te-menu-value span { color:var(--gold) !important; font-family:'DM Sans',sans-serif !important; font-size:12px !important; letter-spacing:0.1em !important; }
   .goog-te-gadget-simple .goog-te-menu-value span:last-child { display:none !important; }
   .goog-te-banner-frame { display:none !important; }
   body { top:0 !important; }
-
-  /* ── TOP NAV ── */
   .top-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(to bottom,rgba(26,26,26,0.95),transparent); backdrop-filter:blur(8px); }
   .nav-brand { font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-weight:300; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; }
-
-  /* ── HERO ── */
   .hero { position:relative; padding:8rem 2rem 5rem; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,169,110,0.12) 0%,transparent 60%); pointer-events:none; }
   .hero-ornament { display:flex; align-items:center; gap:1.5rem; margin-bottom:2.5rem; opacity:0; animation:fadeUp 0.8s 0.2s ease forwards; }
@@ -70,19 +62,13 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   .hero-greeting { font-family:'Cormorant Garamond',serif; font-size:clamp(1rem,2vw,1.2rem); font-weight:300; font-style:italic; color:var(--text-muted); margin-bottom:1rem; opacity:0; animation:fadeUp 0.8s 0.4s ease forwards; }
   .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3rem,8vw,6rem); font-weight:300; line-height:1.1; margin-bottom:0.5rem; opacity:0; animation:fadeUp 0.8s 0.5s ease forwards; }
   .hero-title .accent { color:var(--gold); font-style:italic; }
-
-  /* ── SECTIONS ── */
   section { padding:6rem 2rem; max-width:1200px; margin:0 auto; }
   .section-label { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; }
   .section-label .line { width:30px; height:1px; background:var(--gold); opacity:0.6; }
   .section-label span { font-size:11px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; }
   .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:300; margin-bottom:3rem; line-height:1.2; }
-
-  /* ── MAP ── */
   .map-wrap { border-radius:4px; overflow:hidden; border:1px solid rgba(201,169,110,0.2); }
   .map-wrap iframe { width:100%; height:420px; border:none; display:block; }
-
-  /* ── CARDS ── */
   .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; }
   .property-card { background:var(--charcoal-mid); cursor:pointer; position:relative; overflow:hidden; transition:transform 0.4s ease; text-decoration:none; color:inherit; display:block; }
   .property-card:hover { transform:translateY(-4px); }
@@ -100,27 +86,26 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   .property-card:hover .card-arrow { background:var(--gold); border-color:var(--gold); }
   .card-arrow svg { width:14px; height:14px; stroke:var(--gold); transition:stroke 0.3s; }
   .property-card:hover .card-arrow svg { stroke:var(--charcoal); }
-
-  /* ── FOOTER ── */
+  /* ── PAGINATION ── */
+  .pg-wrap { display:flex; gap:8px; justify-content:center; margin-top:2rem; }
+  .pg-btn { padding:8px 16px; border:1px solid #555; color:#8A8A8A; font-size:13px; font-family:'DM Sans',sans-serif; background:transparent; cursor:pointer; transition:all 0.2s; }
+  .pg-btn.active { border-color:var(--gold); color:var(--gold); }
+  .pg-btn:hover { border-color:var(--gold); color:var(--gold); }
   footer { border-top:1px solid rgba(201,169,110,0.15); padding:3rem 2rem; text-align:center; }
   .footer-brand { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:300; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem; }
   .footer-copy { font-size:11px; color:var(--text-subtle); letter-spacing:0.05em; line-height:1.8; }
-
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
   @media(max-width:640px) { .cards-grid{grid-template-columns:1fr;gap:8px} section{padding:4rem 1.2rem} }
 </style>
 </head>
 <body>
 
-<!-- TOP NAV -->
 <nav class="top-nav">
   <div class="nav-brand notranslate">The Living Plus</div>
   <div id="google_translate_element"></div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-ornament">
     <span class="line"></span>
@@ -131,26 +116,23 @@ const MAP_EMBED_URL = "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk
   <h1 class="hero-title">Mr. <span class="accent">Ro</span></h1>
 </div>
 
-<!-- MAP (ซ่อนอัตโนมัติถ้า MAP_EMBED_URL ว่าง) -->
 <section id="map-zone" style="display:none;">
   <div class="section-label"><span class="line"></span><span>Location</span></div>
   <h2 class="section-title">Where you will live</h2>
   <div class="map-wrap" id="map-wrap"></div>
 </section>
 
-<!-- PROPERTIES -->
 <section id="properties">
   <div class="section-label"><span class="line"></span><span>Selected Units</span></div>
   <h2 class="section-title">Properties for you</h2>
   <div class="cards-grid" id="cards-grid"></div>
-  <div id="pagination" style="display:flex;gap:8px;justify-content:center;margin-top:2rem;"></div>
+  <div class="pg-wrap" id="pagination"></div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-brand notranslate">The Living Plus</div>
   <div class="footer-copy notranslate">
-    © 2026 THE LIVING PLUS. All rights reserved.<br>
+    &copy; 2026 THE LIVING PLUS. All rights reserved.<br>
     Operated by K Corp Co., Ltd.
   </div>
 </footer>
@@ -163,17 +145,12 @@ if (MAP_EMBED_URL && MAP_EMBED_URL.trim() !== '') {
     `<iframe src="${MAP_EMBED_URL}" allowfullscreen loading="lazy"></iframe>`;
 }
 
-// ── CARDS FROM ROOMS_DATA ─────────────────────────────────────────────────
-const grid = document.getElementById('cards-grid');
-  
-const CARDS_PER_PAGE = 2;
-const urlParams = new URLSearchParams(window.location.search);
-const currentPage = parseInt(urlParams.get('page') || '1');
+// ── PAGINATION (JS ล้วน ไม่ reload) ──────────────────────────────────────
 const allVisible = ROOMS_DATA.filter(r => r.price !== '');
 const totalPages = Math.ceil(allVisible.length / CARDS_PER_PAGE);
-const visible = allVisible.slice((currentPage-1)*CARDS_PER_PAGE, currentPage*CARDS_PER_PAGE);
+let currentPage = 1;
 
-visible.forEach(room => {
+function buildCard(room) {
   const a = document.createElement('a');
   a.className = 'property-card';
   a.href = room.file;
@@ -203,39 +180,56 @@ visible.forEach(room => {
         </svg>
       </div>
     </div>`;
-  grid.appendChild(a);
-});
+  return a;
+}
 
+function renderPage(page) {
+  currentPage = page;
+  const grid = document.getElementById('cards-grid');
+  grid.innerHTML = '';
+  const start = (page - 1) * CARDS_PER_PAGE;
+  const pageRooms = allVisible.slice(start, start + CARDS_PER_PAGE);
+
+  if (pageRooms.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--text-muted);font-size:13px;letter-spacing:0.1em;border:1px dashed rgba(201,169,110,0.2);">ยังไม่มีทรัพย์ที่แสดง</div>`;
+  } else {
+    pageRooms.forEach(room => grid.appendChild(buildCard(room)));
+  }
+
+  // update pagination buttons
+  document.querySelectorAll('.pg-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i + 1 === page);
+  });
+}
+
+// build pagination buttons
 if (totalPages > 1) {
   const pg = document.getElementById('pagination');
   for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('a');
-    btn.href = `?page=${i}`;
+    const btn = document.createElement('button');
+    btn.className = 'pg-btn' + (i === 1 ? ' active' : '');
     btn.textContent = i;
-    btn.style.cssText = `padding:8px 16px;border:1px solid ${i===currentPage?'var(--gold)':'var(--charcoal-border)'};color:${i===currentPage?'var(--gold)':'var(--text-muted)'};text-decoration:none;font-size:13px;`;
+    btn.onclick = () => renderPage(i);
     pg.appendChild(btn);
   }
 }
-  
-if (visible.length === 0) {
-  grid.innerHTML = `<div style="grid-column:1/-1;padding:4rem;text-align:center;color:var(--text-muted);font-size:13px;letter-spacing:0.1em;border:1px dashed rgba(201,169,110,0.2);">ยังไม่มีทรัพย์ที่แสดง — กรอกข้อมูลใน admin.html แล้ว generate rooms-data.js</div>`;
-}
+
+// swipe support (mobile)
+let swipeStartX = 0;
+const cardGrid = document.getElementById('cards-grid');
+cardGrid.addEventListener('touchstart', e => { swipeStartX = e.touches[0].clientX; }, { passive: true });
+cardGrid.addEventListener('touchend', e => {
+  const dx = swipeStartX - e.changedTouches[0].clientX;
+  if (dx > 60 && currentPage < totalPages) renderPage(currentPage + 1);
+  if (dx < -60 && currentPage > 1) renderPage(currentPage - 1);
+}, { passive: true });
+
+// initial render
+renderPage(1);
 </script>
 
-<!-- ████████████████████████████████████████████████
-     🌐 DEFAULT LANGUAGE ON PAGE LOAD
-     เปลี่ยนภาษา default ตรงนี้ที่เดียว:
-       'ja'  = ญี่ปุ่น
-       'en'  = อังกฤษ
-       ''    = ไทย (ปิด translate / ภาษาต้นฉบับ)
-     ████████████████████████████████████████████████ -->
 <script>
 window.addEventListener('load', function() {
-  if (new URLSearchParams(window.location.search).get('page')) {
-setTimeout(() => {
-  document.getElementById('properties').scrollIntoView({ behavior: 'smooth' });
-}, 100);
-  }
   setTimeout(function() {
     var select = document.querySelector('.goog-te-combo');
     if (select) { select.value = 'en'; select.dispatchEvent(new Event('change')); }
