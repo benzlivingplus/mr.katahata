@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room 9 — THE LIVING PLUS</title>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'th',
+    includedLanguages: 'th,en,ja',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --charcoal: #1A1A1A;
+    --charcoal-mid: #242424;
+    --charcoal-light: #2D2D2D;
+    --charcoal-border: #383838;
+    --cream: #F7F3EC;
+    --cream-dark: #EDE6D8;
+    --text-muted: #8A8A8A;
+    --text-subtle: #5A5A5A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--charcoal); color: var(--cream); min-height: 100vh; }
+
+  /* ── GOOGLE TRANSLATE ── */
+  #google_translate_element { display: inline-block; }
+  .goog-te-gadget-simple {
+    background: transparent !important;
+    border: 1px solid rgba(201,169,110,0.4) !important;
+    border-radius: 3px !important;
+    padding: 4px 10px !important;
+    font-size: 12px !important;
+    cursor: pointer;
+  }
+  .goog-te-gadget-simple span,
+  .goog-te-gadget-simple .goog-te-menu-value span {
+    color: var(--gold) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 12px !important;
+    letter-spacing: 0.1em !important;
+  }
+  .goog-te-gadget-simple .goog-te-menu-value span:last-child { display: none !important; }
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+
+  /* ── NAV ── */
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(to bottom, rgba(26,26,26,0.95), transparent);
+    backdrop-filter: blur(8px);
+  }
+  .back-btn {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--cream); text-decoration: none; font-size: 13px;
+    letter-spacing: 0.1em; opacity: 0.7; transition: opacity 0.2s;
+  }
+  .back-btn:hover { opacity: 1; }
+  .back-btn svg { width: 16px; height: 16px; stroke: currentColor; }
+  .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+    font-weight: 300; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase;
+  }
+
+  /* ── COVER ── */
+  .cover { width: 100%; height: 70vh; min-height: 400px; position: relative; overflow: hidden; background: var(--charcoal-mid); }
+  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,26,26,0.2) 0%, transparent 40%, rgba(26,26,26,0.85) 100%); }
+  .cover-info { position: absolute; bottom: 3rem; left: 2rem; right: 2rem; }
+  .cover-tag { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.8rem; }
+  .cover-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem; }
+  .cover-price { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: var(--gold); }
+  .cover-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--text-muted); background: var(--charcoal-mid); }
+  .cover-placeholder p { font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .cover-placeholder .hint { font-size: 11px; color: var(--text-subtle); font-family: monospace; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 4px; }
+
+  /* ── CONTENT ── */
+  .content { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+
+  /* ── SPECS ── */
+  .specs-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 1px; border: 1px solid var(--charcoal-border); margin-bottom: 4rem; }
+  .spec-cell { padding: 1.5rem; background: var(--charcoal-mid); text-align: center; }
+  .spec-cell .val { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--cream); display: block; line-height: 1; margin-bottom: 0.4rem; }
+  .spec-cell .lbl { font-size: 10px; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* ── SECTION LABELS ── */
+  .section-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+  .section-label .line { width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+  .section-label span { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; }
+
+  /* ── DESCRIPTION ── */
+  .desc-section { margin-bottom: 4rem; }
+  .desc-text { font-size: 15px; line-height: 1.9; color: var(--cream-dark); }
+
+  /* ── GALLERY ── */
+  .gallery-section { margin-bottom: 4rem; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .g-item { aspect-ratio: 4/3; overflow: hidden; cursor: pointer; position: relative; background: var(--charcoal-mid); }
+  .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+  .g-item:hover img { transform: scale(1.05); }
+  .gallery-more { position: absolute; inset: 0; background: rgba(26,26,26,0.7); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); pointer-events: none; }
+  .gallery-empty { grid-column: 1/-1; padding: 3rem; text-align: center; color: var(--text-muted); font-size: 13px; letter-spacing: 0.1em; border: 1px dashed rgba(201,169,110,0.2); }
+  .gallery-empty small { display: block; margin-top: 0.5rem; opacity: 0.5; font-size: 11px; font-family: monospace; }
+
+  /* ── LIGHTBOX (gallery + travel) ── */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.96); z-index: 1000; align-items: center; justify-content: center; flex-direction: column; gap: 1rem; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 78vh; object-fit: contain; }
+  .lb-close { position: absolute; top: 1.5rem; right: 1.5rem; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; background: transparent; color: var(--cream); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+  .lb-close:hover { border-color: var(--gold); color: var(--gold); }
+  .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid rgba(255,255,255,0.15); width: 44px; height: 44px; border-radius: 50%; color: var(--cream); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+  .lb-nav:hover { border-color: var(--gold); color: var(--gold); }
+  .lb-prev { left: 1.5rem; }
+  .lb-next { right: 1.5rem; }
+  .lb-dots { display: flex; gap: 6px; }
+  .lb-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: background 0.2s; border: none; }
+  .lb-dot.active { background: var(--gold); }
+  .lb-caption { font-size: 12px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
+
+  /* ── TRAVEL ── */
+  .travel-section { margin-bottom: 4rem; }
+  .travel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .travel-item { background: var(--charcoal-mid); overflow: hidden; }
+  .travel-item-clickable { cursor: pointer; position: relative; }
+  .travel-item-clickable::after { content: ''; position: absolute; inset: 0; background: rgba(201,169,110,0); transition: background 0.2s; pointer-events: none; }
+  .travel-item-clickable:hover::after { background: rgba(201,169,110,0.06); }
+  .travel-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .travel-placeholder { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: var(--text-subtle); }
+  .travel-placeholder p { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .travel-placeholder small { font-size: 10px; font-family: monospace; opacity: 0.5; }
+  .travel-caption { padding: 1rem 1.2rem; font-size: 12px; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; border-top: 1px solid var(--charcoal-border); display: flex; align-items: center; justify-content: space-between; }
+  .travel-badge { font-size: 10px; color: var(--gold); opacity: 0.7; letter-spacing: 0.05em; }
+
+/* ── MAP ── */
+  .map-section { margin-bottom: 4rem; }
+  .map-wrap { border-radius: 4px; overflow: hidden; border: 1px solid var(--charcoal-border); }
+  .map-wrap iframe { width: 100%; height: 380px; border: none; display: block; }
+  
+  /* ── VIDEO ── */
+  .video-section { margin-bottom: 4rem; }
+  .video-wrap { position: relative; aspect-ratio: 16/9; background: var(--charcoal-mid); border: 1px solid var(--charcoal-border); overflow: hidden; }
+  .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+
+  /* ── RELATED ROOMS SLIDER ── */
+  .related-section { margin-bottom: 4rem; }
+  .slider-controls { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+  .slider-controls .section-label { margin-bottom: 0; }
+  .slider-btns { display: flex; gap: 8px; }
+  .s-btn { width: 34px; height: 34px; border: 1px solid var(--charcoal-border); border-radius: 50%; background: transparent; color: var(--text-muted); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .s-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .s-btn:disabled { opacity: 0.2; cursor: default; }
+  .slider-track-wrap { overflow: hidden; }
+  .slider-track { display: flex; gap: 16px; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); }
+  .related-card { flex: 0 0 260px; background: var(--charcoal-mid); border: 1px solid var(--charcoal-border); text-decoration: none; color: inherit; display: block; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+  .related-card:hover { border-color: rgba(201,169,110,0.4); transform: translateY(-3px); }
+  .related-card-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; background: var(--charcoal-light); transition: transform 0.5s ease; }
+  .related-card:hover .related-card-img { transform: scale(1.04); }
+  .related-card-img-ph { width: 100%; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; background: var(--charcoal-light); color: var(--text-subtle); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .related-card-body { padding: 1rem 1.1rem; }
+  .related-card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 400; color: var(--cream); margin-bottom: 0.4rem; }
+  .related-card-price { font-size: 13px; color: var(--gold); font-weight: 500; margin-bottom: 0.25rem; }
+  .related-card-meta { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  /* ── CTA ── */
+  .cta-section { border-top: 1px solid var(--charcoal-border); padding-top: 3rem; text-align: center; margin-bottom: 2rem; }
+  .cta-label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2rem; line-height: 1.3; }
+  .btn-back { display: inline-flex; align-items: center; gap: 0.6rem; padding: 12px 2.5rem; border: 1px solid rgba(201,169,110,0.5); color: var(--gold); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-back:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid rgba(201,169,110,0.15); padding: 2.5rem 2rem; text-align: center; max-width: 900px; margin: 0 auto; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .footer-copy { font-size: 11px; color: var(--text-subtle); letter-spacing: 0.05em; line-height: 1.8; }
+
+  @media (max-width: 640px) {
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .travel-grid { grid-template-columns: 1fr; }
+    .cover-info { left: 1.2rem; right: 1.2rem; bottom: 2rem; }
+    .content { padding: 2.5rem 1.2rem; }
+    .nav-brand { display: none; }
+    .related-card { flex: 0 0 220px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ████████████████████████████████████████████████
+     📋 ROOMS DATA — ดึง other rooms จากไฟล์กลาง
+     ████████████████████████████████████████████████ -->
+<script src="rooms-data.js"></script>
+
+<!-- ████████████████████████████████████████████████
+     ⚙️  ROOM CONFIG — แก้ตรงนี้ที่เดียวพอครับ
+     ████████████████████████████████████████████████ -->
+<script>
+const ROOM = {
+  // ── ข้อมูลพื้นฐาน ──────────────────────────────
+  name:        "Room 9",
+  type:        "Condominium · Lowrise · Resale",
+  price:       "4,200,000",
+  sqm:         "29",          // แสดงเป็นตัวเลขอย่างเดียว ไม่มี ตร.ม.
+  pricePerSqm: "144,827",      // แสดงเป็นตัวเลขอย่างเดียว ไม่มี ฿
+  facilityFee: "30",           // ค่า Facility fee / SQ.M. เช่น "50"
+  floor:       "1",           // เช่น "12"
+  bedBath:     "1/1",           // เช่น "1 / 1"
+  btsDistance: "450",           // ระยะห่าง BTS เช่น "350 m"
+
+  // ── รายละเอียดห้อง (ภาษาไทย) ────────────────────
+  // ถ้าไม่กรอก (ปล่อยว่าง "") section นี้จะซ่อนอัตโนมัติ
+  description: `apanese-inspired room at Noble Ambience Sukhumvit 42. The room is on the first floor with a zen garden view. The garden lighting is perfect for nightly reading and mediation. 
+Room dimensions: Studio Room 29 sqm. 1st Floor.
+Furniture that comes with the room:
+ * Refrigerator
+ * Washer-dryer machine
+ * Microwave
+ * Storage cabinet and dining table
+ * Bookshelves and dedicated reading light 
+ * Sofa bed
+ * Chair that can be converted into a bed (the blue one)
+ * Water heater (hot and cold water adjustable at the tap, like in a hotel)
+ * Coffee table
+ * Smart TV
+ * Free Wi-Fi in the room 
+ * Blackout curtains
+ * The room's folding door can be opened to go out and sit or walk in the garden.
+Other facilities:
+ * Near BTS Ekkamai, 400 meters away. It's a safe walk from the condo. You can access the station via Bangkok Mediplex and Gateway Ekamai.
+ * Parking available
+ * Fitness center and swimming pool`,
+
+  // ── รูปปก ──────────────────────────────────────
+  // วิธีได้ URL: Google Drive → คลิกรูป → Share → copy link
+  // แปลง: https://drive.google.com/file/d/FILE_ID/view
+  //    → https://drive.google.com/thumbnail?id=FILE_ID
+  coverPhoto: "https://drive.google.com/thumbnail?id=1KefPBm6ZctH80bNVmFQ2CzZTxVCs4TNN&sz=w1200",
+
+  // ── Gallery รูปภาพ ──────────────────────────────
+  photos: [
+        "https://drive.google.com/thumbnail?id=15v2qnu_4EZ7FSBJuT8ZMwjj8IxRydRZs&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1MUlT-SX3eS3Tpw-6O7AWEPt9AHEXBSv9&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1IHdY5a463u0k6G3VaMtvC6cFU3log1pp&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1KU5LhPWEd2A84rW7m2QVJuiq3btOZ4TP&sz=w1200",
+  "https://drive.google.com/thumbnail?id=17j9XH06RQR2MlYht-Ek7R5gyvX5ZMJah&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1SBOTRugJZt9MiIs-IirKGzl8PxJ-T5a2&sz=w1200",
+  "https://drive.google.com/thumbnail?id=13lYxivqcILh-K0zvAKipWAJ8VOlccs8z&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1zSRrroQrv-sOSbFnmx5fQECQb-9lz0tn&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1yyx19A2TNrcJOG2Jg7EhVqeI2uquDGOW&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1jfZtEpxX3eNfof_2sufpxzadv3hAENXj&sz=w1200",
+  ],
+
+  // ── Link อัลบั้ม Google Photos (ถ้ามี) ─────────
+  photosAlbum: "",
+
+    // ── Facility ส่วนกลาง ──────────────────────────────
+  photos: [
+        "https://drive.google.com/thumbnail?id=1e6L2a3spKAQvFUnO1zOLskJLxX3TRFIj&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1dlz4IMDyseRb6G0SLwq8wI__VGNU2mLI&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1r8aU2yBaujBXaqmwUadNCmpQKRzJ3HUC&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1hJOna4b76dP4s9vUXLn40FSNlKTUKjyi&sz=w1200",
+  "https://drive.google.com/thumbnail?id=1TdIwC2f8W3YEvKgOWrLgzT0EeQvxWW6Y&sz=w1200",
+  ],
+
+  // ── รูปการเดินทาง ───────────────────────────────
+  // travelCarPhoto  : รูปเดียว (by car)
+  // travelWalkPhotos: ใส่ได้หลายรูป กดแล้ว pop-up slider
+  travelCarPhoto:   "",        // ← URL รูปขับรถ (1 รูป)
+  travelCarCaption: "🚗 By car (17 min)",  // ← แก้ข้อความ caption ได้ เช่น "🚗 By car (15 min)"
+
+  travelWalkPhotos: [
+    "",
+  ],
+  travelWalkCaption: "🚶 On foot · BTS (13 min)",  // ← แก้ข้อความ caption เช่น "🚶 On foot · BTS (30-45 min)"
+
+  // ── YouTube Video ID ────────────────────────────
+  // ถ้าไม่กรอก (ปล่อยว่าง "") section นี้จะซ่อนอัตโนมัติ
+  // เช่น URL: https://www.youtube.com/watch?v=dQw4w9WgXcQ → videoId = "dQw4w9WgXcQ"
+  videoId: "",
+
+  // ── แผนที่ตำแหน่งห้อง ─────────────────────────────
+  // ถ้าว่าง ("") จะซ่อน section อัตโนมัติ
+  mapUrl: "https://www.google.com/maps/d/u/0/embed?mid=1wjqqk4i-Kidk7kZ4ts5HGZTZygnDWfQ&ehbc=2E312F&ll=13.717370333263146, 100.58335902308554&z=17",
+};
+
+// ── ห้องอื่นๆ — ดึงจาก rooms-data.js อัตโนมัติ ──────────────────────────
+const currentFile = location.pathname.split('/').pop() || 'room3.html';
+const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
+  ? ROOMS_DATA.filter(r => r.file !== currentFile && r.price !== '').map(r => ({
+      name:  r.name,
+      price: r.price,
+      sqm:   r.sqm,
+      cover: r.cover,
+      link:  r.file
+    }))
+  : [];
+</script>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <a class="back-btn" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7"/>
+    </svg>
+    Back
+  </a>
+  <div class="nav-right">
+    <div id="google_translate_element"></div>
+    <div class="nav-brand notranslate">The Living Plus</div>
+  </div>
+</nav>
+
+<!-- COVER -->
+<div class="cover" id="cover-wrap">
+  <div class="cover-overlay"></div>
+  <div class="cover-info">
+    <div class="cover-tag" id="cover-tag"></div>
+    <h1 class="cover-title notranslate" id="cover-title"></h1>
+    <div class="cover-price" id="cover-price"></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- SPECS -->
+  <div class="specs-row" id="specs-row"></div>
+
+  <!-- DESCRIPTION (ซ่อนถ้าไม่กรอก) -->
+  <div class="desc-section" id="desc-section">
+    <div class="section-label"><span class="line"></span><span>About this property</span></div>
+    <div class="desc-text" id="desc-text"></div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="section-label"><span class="line"></span><span>Gallery</span></div>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <p id="album-link" style="font-size:12px;color:var(--text-muted);margin-top:1rem;letter-spacing:0.05em;display:none;">
+      ดูอัลบั้มเต็ม:
+      <a id="album-a" href="#" target="_blank" style="color:var(--gold);text-decoration:none;">Google Photos →</a>
+    </p>
+  </div>
+
+  <!-- MAP (ซ่อนถ้าไม่มี mapUrl) -->
+  <div class="map-section" id="map-section" style="display:none;">
+    <div class="section-label"><span class="line"></span><span>Location</span></div>
+    <div class="map-wrap" id="room-map-wrap"></div>
+  </div>
+
+  <!-- HOW TO GO (ซ่อน section ถ้าไม่มีรูปเลย) -->
+  <div class="travel-section" id="travel-section">
+    <div class="section-label"><span class="line"></span><span>How to go to Brian Spoke Head Office</span></div>
+    <div class="travel-grid" id="travel-grid"></div>
+  </div>
+
+  
+  <!-- VIDEO (ซ่อนถ้าไม่มี videoId) -->
+  <div class="video-section" id="video-section" style="display:none;">
+    <div class="section-label"><span class="line"></span><span>Video Tour</span></div>
+    <div class="video-wrap" id="video-wrap"></div>
+  </div>
+
+  <!-- RELATED ROOMS SLIDER -->
+  <div class="related-section" id="related-section" style="display:none;">
+    <div class="slider-controls">
+      <div class="section-label" style="margin-bottom:0;">
+        <span class="line"></span><span>Other Properties</span>
+      </div>
+      <div class="slider-btns">
+        <button class="s-btn" id="s-prev">‹</button>
+        <button class="s-btn" id="s-next">›</button>
+      </div>
+    </div>
+    <div class="slider-track-wrap">
+      <div class="slider-track" id="slider-track"></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-label">Looking for more?</div>
+    <div class="cta-title">See all properties<br>selected for you</div>
+    <a class="btn-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to all properties
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand notranslate">The Living Plus</div>
+  <div class="footer-copy notranslate">
+    © 2026 THE LIVING PLUS. All rights reserved.<br>
+    Operated by K Corp Co., Ltd.
+  </div>
+</footer>
+
+<!-- LIGHTBOX (ใช้ร่วมกันทั้ง gallery และ travel walk) -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" id="lb-prev" onclick="lbNav(-1);event.stopPropagation()">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav lb-next" id="lb-next" onclick="lbNav(1);event.stopPropagation()">›</button>
+  <div class="lb-dots" id="lb-dots"></div>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<script>
+// ── COVER ─────────────────────────────────────────────────────────────────────
+document.getElementById('cover-tag').textContent  = ROOM.type;
+document.getElementById('cover-title').textContent = ROOM.name;
+document.getElementById('cover-price').textContent = '฿ ' + ROOM.price;
+if (ROOM.coverPhoto) {
+  const img = document.createElement('img');
+  img.src = ROOM.coverPhoto; img.alt = ROOM.name;
+  document.getElementById('cover-wrap').prepend(img);
+} else {
+  const ph = document.createElement('div');
+  ph.className = 'cover-placeholder';
+  ph.innerHTML = `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><p>Cover Photo</p><span class="hint">ใส่ URL ใน ROOM.coverPhoto</span>`;
+  document.getElementById('cover-wrap').prepend(ph);
+}
+
+// ── SPECS ─────────────────────────────────────────────────────────────────────
+// ลำดับ: SIZE SQ.M. | THB/SQ.M. | FACILITY FEE/SQ.M. | FLOOR | BED/BATH | BTS DISTANCE
+document.getElementById('specs-row').innerHTML = [
+  { val: ROOM.sqm,         lbl: 'Size SQ.M.' },
+  { val: ROOM.pricePerSqm, lbl: 'THB / SQ.M.' },
+  { val: ROOM.facilityFee, lbl: 'Facility Fee / SQ.M.' },
+  { val: ROOM.floor,       lbl: 'Floor' },
+  { val: ROOM.bedBath, lbl: '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-1px;opacity:0.6"><path d="M3 11V19M21 11V19M3 11C3 8 6 6 12 6C18 6 21 8 21 11M3 19H21M7 11V19M17 11V19"/></svg> / <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="vertical-align:-1px;opacity:0.6"><path d="M4 12H20M4 12V18H20V12M4 12V8C4 6.9 4.9 6 6 6H10C11.1 6 12 6.9 12 8V12"/></svg>' },
+  { val: ROOM.btsDistance, lbl: 'M. to BTS' },
+].map(s => `<div class="spec-cell"><span class="val">${s.val}</span><span class="lbl">${s.lbl}</span></div>`).join('');
+
+// ── DESCRIPTION (ซ่อนถ้าว่าง) ────────────────────────────────────────────────
+if (!ROOM.description.trim()) {
+  document.getElementById('desc-section').style.display = 'none';
+} else {
+  document.getElementById('desc-text').innerHTML = ROOM.description.replace(/\n/g, '<br>');
+}
+
+// ── ALBUM LINK ────────────────────────────────────────────────────────────────
+if (ROOM.photosAlbum) {
+  document.getElementById('album-link').style.display = 'block';
+  document.getElementById('album-a').href = ROOM.photosAlbum;
+}
+
+// ── GALLERY ───────────────────────────────────────────────────────────────────
+const grid = document.getElementById('gallery-grid');
+if (!ROOM.photos.length) {
+  grid.innerHTML = `<div class="gallery-empty">Gallery photos will appear here<small>เพิ่ม URL ใน ROOM.photos [ ]</small></div>`;
+} else {
+  const show = Math.min(ROOM.photos.length, 6);
+  const rem = ROOM.photos.length - show;
+  ROOM.photos.slice(0, show).forEach((url, i) => {
+    const el = document.createElement('div');
+    el.className = 'g-item';
+    const isLast = i === show - 1 && rem > 0;
+    el.innerHTML = `<img src="${url}" alt="Photo ${i+1}" loading="lazy">${isLast ? `<div class="gallery-more">+${rem}</div>` : ''}`;
+    el.onclick = () => openLightbox(ROOM.photos, i, '');
+    grid.appendChild(el);
+  });
+}
+
+// ── TRAVEL ────────────────────────────────────────────────────────────────────
+const travelGrid = document.getElementById('travel-grid');
+const hasCar  = !!ROOM.travelCarPhoto;
+const hasWalk = ROOM.travelWalkPhotos.length > 0;
+
+if (!hasCar && !hasWalk) {
+  document.getElementById('travel-section').style.display = 'none';
+} else {
+  // By Car — 1 รูป
+  if (hasCar) {
+    const d = document.createElement('div');
+    d.className = 'travel-item travel-item-clickable';
+    d.onclick = () => openLightbox([ROOM.travelCarPhoto], 0, ROOM.travelCarCaption);
+    d.innerHTML = `
+      <img class="travel-img" src="${ROOM.travelCarPhoto}" alt="By car">
+      <div class="travel-caption">${ROOM.travelCarCaption}</div>`;
+    travelGrid.appendChild(d);
+  } else {
+    const d = document.createElement('div');
+    d.className = 'travel-item';
+    d.innerHTML = `
+      <div class="travel-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="9" width="20" height="9" rx="2"/><path d="M6 9V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3"/></svg><p>By Car</p><small>ROOM.travelCarPhoto</small></div>
+      <div class="travel-caption">${ROOM.travelCarCaption}</div>`;
+    travelGrid.appendChild(d);
+  }
+
+  // On foot / BTS — หลายรูป กดแล้ว pop-up slider
+  const walkCount = ROOM.travelWalkPhotos.length;
+  const dw = document.createElement('div');
+  dw.className = 'travel-item';
+  if (walkCount > 0) {
+    dw.classList.add('travel-item-clickable');
+    dw.onclick = () => openLightbox(ROOM.travelWalkPhotos, 0, ROOM.travelWalkCaption);
+    dw.innerHTML = `
+      <img class="travel-img" src="${ROOM.travelWalkPhotos[0]}" alt="On foot">
+      <div class="travel-caption">
+        ${ROOM.travelWalkCaption}
+        ${walkCount > 1 ? `<span class="travel-badge">tap · ${walkCount} photos</span>` : ''}
+      </div>`;
+  } else {
+    dw.innerHTML = `
+      <div class="travel-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 5.5a3 3 0 1 0-2 0M9 10l-1 7 4-2 4 2-1-7"/><path d="M3 20h18"/></svg><p>On foot · BTS</p><small>ROOM.travelWalkPhotos [ ]</small></div>
+      <div class="travel-caption">${ROOM.travelWalkCaption}</div>`;
+  }
+  travelGrid.appendChild(dw);
+}
+
+// ── MAP ──────────────────────────────────────────────────────────────────────
+if (ROOM.mapUrl) {
+  document.getElementById('map-section').style.display = 'block';
+  document.getElementById('room-map-wrap').innerHTML =
+    `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
+}
+  
+// ── VIDEO (ซ่อนถ้าไม่มี videoId) ─────────────────────────────────────────────
+if (ROOM.videoId) {
+  document.getElementById('video-section').style.display = 'block';
+  document.getElementById('video-wrap').innerHTML =
+    `<iframe src="https://www.youtube.com/embed/${ROOM.videoId}" allowfullscreen></iframe>`;
+}
+
+// ── RELATED ROOMS SLIDER ──────────────────────────────────────────────────────
+if (OTHER_ROOMS.length > 0) {
+  document.getElementById('related-section').style.display = 'block';
+  const track = document.getElementById('slider-track');
+  OTHER_ROOMS.forEach(r => {
+    const card = document.createElement('a');
+    card.className = 'related-card';
+    card.href = r.link;
+    card.innerHTML = (r.cover
+      ? `<img class="related-card-img" src="${r.cover}" alt="${r.name}" loading="lazy">`
+      : `<div class="related-card-img-ph">${r.name}</div>`)
+      + `<div class="related-card-body">
+           <div class="related-card-name notranslate">${r.name}</div>
+           <div class="related-card-price">฿ ${r.price}</div>
+           <div class="related-card-meta">${r.sqm} SQ.M.</div>
+         </div>`;
+    track.appendChild(card);
+  });
+  let pos = 0;
+  const cardW = 276;
+  const maxPos = Math.max(0, OTHER_ROOMS.length - 3);
+  const prev = document.getElementById('s-prev');
+  const next = document.getElementById('s-next');
+  function updateSlider() {
+    track.style.transform = `translateX(-${pos * cardW}px)`;
+    prev.disabled = pos === 0;
+    next.disabled = pos >= maxPos;
+  }
+  prev.onclick = () => { pos = Math.max(0, pos-1); updateSlider(); };
+  next.onclick = () => { pos = Math.min(maxPos, pos+1); updateSlider(); };
+  updateSlider();
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if (dx > 50 && pos < maxPos) { pos++; updateSlider(); }
+    if (dx < -50 && pos > 0)     { pos--; updateSlider(); }
+  }, {passive:true});
+}
+
+// ── LIGHTBOX (universal: gallery + travel walk) ───────────────────────────────
+let lbImages = [];
+let lbIndex  = 0;
+
+function openLightbox(images, startIndex, caption) {
+  lbImages = images;
+  lbIndex  = startIndex;
+  renderLightbox(caption);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function renderLightbox(captionOverride) {
+  document.getElementById('lb-img').src = lbImages[lbIndex];
+  // nav visibility
+  document.getElementById('lb-prev').style.display = lbImages.length > 1 ? 'flex' : 'none';
+  document.getElementById('lb-next').style.display = lbImages.length > 1 ? 'flex' : 'none';
+  // dots
+  const dotsEl = document.getElementById('lb-dots');
+  dotsEl.innerHTML = lbImages.length > 1
+    ? lbImages.map((_, i) => `<button class="lb-dot ${i===lbIndex?'active':''}" onclick="lbGoTo(${i});event.stopPropagation()"></button>`).join('')
+    : '';
+  // caption
+  document.getElementById('lb-caption').textContent =
+    captionOverride !== undefined ? captionOverride : '';
+}
+
+function lbNav(dir) {
+  lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+  renderLightbox();
+}
+
+function lbGoTo(i) {
+  lbIndex = i;
+  renderLightbox();
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowLeft')   lbNav(-1);
+  if (e.key === 'ArrowRight')  lbNav(1);
+});
+</script>
+
+<!-- ████████████████████████████████████████████████
+     🌐 DEFAULT LANGUAGE ON PAGE LOAD
+     เปลี่ยนภาษา default ตรงนี้ที่เดียว:
+       'ja'  = ญี่ปุ่น
+       'en'  = อังกฤษ
+       ''    = ไทย (ปิด translate / ภาษาต้นฉบับ)
+     ████████████████████████████████████████████████ -->
+<script>
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var select = document.querySelector('.goog-te-combo');
+    if (select) { select.value = 'ja'; select.dispatchEvent(new Event('change')); }
+  }, 800);
+});
+</script>
+
+</body>
+</html>
