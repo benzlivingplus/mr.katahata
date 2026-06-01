@@ -101,6 +101,7 @@ const ROOMS_DATA = [
     price:       "",
     sqm:         "",
     pricePerSqm: "",
+    bedBath:     "1/1",
     cover:       "",
   },
 
@@ -112,6 +113,7 @@ const ROOMS_DATA = [
     price:       "4,200,000",
     sqm:         "29",
     pricePerSqm: "144,827",
+    bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1KefPBm6ZctH80bNVmFQ2CzZTxVCs4TNN&sz=w1200",
   },
 
@@ -123,6 +125,7 @@ const ROOMS_DATA = [
     price:       "",
     sqm:         "",
     pricePerSqm: "",
+    bedBath:     "1/1",
     cover:       "",
   },
 
@@ -134,6 +137,7 @@ const ROOMS_DATA = [
     price:       "",
     sqm:         "",
     pricePerSqm: "",
+    bedBath:     "1/1",
     cover:       "",
   },
 
