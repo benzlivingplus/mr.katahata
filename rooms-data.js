@@ -97,7 +97,7 @@ const ROOMS_DATA = [
   {
     file:        "room8.html",
     name:        "Room 8",
-    type:        "Condominium · Bangkok · For Sale",
+    type:        "Condominium · Low Rise · Resale",
     price:       "",
     sqm:         "",
     pricePerSqm: "",
@@ -119,7 +119,18 @@ const ROOMS_DATA = [
   {
     file:        "room10.html",
     name:        "Room 10",
-    type:        "Condominium · Bangkok · For Sale",
+    type:        "Condominium · Hi Rise · Resale",
+    price:       "",
+    sqm:         "",
+    pricePerSqm: "",
+    cover:       "",
+  },
+
+  // ── ROOM 11 ─────────────────────────────────────────────────────
+  {
+    file:        "room11.html",
+    name:        "Room 11",
+    type:        "Condominium · Hi Rise · Resale",
     price:       "",
     sqm:         "",
     pricePerSqm: "",
