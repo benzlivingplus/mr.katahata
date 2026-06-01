@@ -53,7 +53,7 @@ const ROOMS_DATA = [
     price:       "3,990,000",
     sqm:         "38.5",
     pricePerSqm: "103,600",
-    cover:       "",
+    cover:       "https://drive.google.com/thumbnail?id=1kOHyG37GilebNoEsMNtBNxSUFvBc7XhV&sz=w1200",
   },
 
   // ── ROOM 5 ──────────────────────────────────────────────────────
