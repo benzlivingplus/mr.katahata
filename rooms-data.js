@@ -11,7 +11,7 @@ const ROOMS_DATA = [
   {
     file:        "room1.html",          // ชื่อไฟล์ HTML ของห้องนี้
     name:        "Room 1",              // ชื่อห้อง (notranslate)
-    type:        "Condominium · Lowrise · Resale",
+    type:        "Condominium · Low Rise · Resale",
     price:       "3,900,000",           // ราคา (ไม่ต้องใส่ ฿)
     sqm:         "40",                  // ขนาด (ไม่ต้องใส่ ตร.ม.)
     pricePerSqm: "97,500",              // ราคา/ตร.ม. (ไม่ต้องใส่ ฿)
@@ -25,7 +25,7 @@ const ROOMS_DATA = [
   {
     file:        "room2.html",
     name:        "Room 2",
-    type:        "Condominium · Lowrise · Resale",
+    type:        "Condominium · Low Rise · Resale",
     price:       "4,900,000",                    // ← ว่าง = ซ่อน card
     sqm:         "60",
     pricePerSqm: "81,600",
@@ -37,7 +37,7 @@ const ROOMS_DATA = [
   {
     file:        "room3.html",
     name:        "Room 3",
-    type:        "Condominium · Lowrise · Resale",
+    type:        "Condominium · Low Rise · Resale",
     price:       "4,390,000",
     sqm:         "47",
     pricePerSqm: "93,400",
@@ -49,10 +49,10 @@ const ROOMS_DATA = [
   {
     file:        "room4.html",
     name:        "Room 4",
-    type:        "Condominium · Bangkok · For Sale",
-    price:       "",
-    sqm:         "",
-    pricePerSqm: "",
+    type:        "Condominium · Hi Rise · Resale",
+    price:       "3,990,000",
+    sqm:         "38.5",
+    pricePerSqm: "103,600",
     cover:       "",
   },
 
