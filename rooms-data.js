@@ -86,18 +86,6 @@ const ROOMS_DATA = [
     file:        "room7.html",
     name:        "Room 7",
     type:        "Condominium · Low Rise · Resale",
-    price:       "3,700,000",
-    sqm:         "29",
-    pricePerSqm: "127,500",
-        bedBath:     "1/1",
-    cover:       "https://drive.google.com/thumbnail?id=1myLOa3KJ77e9OW8enMRCm45YegRFmwyU&sz=w1200",
-  },
-
-  // ── ROOM 8 ──────────────────────────────────────────────────────
-  {
-    file:        "room8.html",
-    name:        "Room 8",
-    type:        "Condominium · Low Rise · Resale",
     price:       "3,300,000",
     sqm:         "35",
     pricePerSqm: "94,285",
@@ -105,16 +93,28 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1H7TbU91eIu0PVy4nvtqxxjmItXCusram&sz=w1200",
   },
 
+  // ── ROOM 8 ──────────────────────────────────────────────────────
+  {
+    file:        "room8.html",
+    name:        "Room 8",
+    type:        "Condominium · Low Rise · Resale",
+    price:       "",
+    sqm:         "35",
+    pricePerSqm: "94,285",
+    bedBath:     "2/1",
+    cover:       "",
+  },
+
   // ── ROOM 9 ──────────────────────────────────────────────────────
   {
     file:        "room9.html",
     name:        "Room 9",
     type:        "Condominium · Low Rise · Resale",
-    price:       "4,200,000",
+    price:       "",
     sqm:         "29",
     pricePerSqm: "144,827",
     bedBath:     "1/1",
-    cover:       "https://drive.google.com/thumbnail?id=1KefPBm6ZctH80bNVmFQ2CzZTxVCs4TNN&sz=w1200",
+    cover:       "",
   },
 
   // ── ROOM 10 ─────────────────────────────────────────────────────
@@ -122,11 +122,11 @@ const ROOMS_DATA = [
     file:        "room10.html",
     name:        "Room 10",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "4,000,000",
+    price:       "",
     sqm:         "67",
     pricePerSqm: "59,800",
     bedBath:     "1/1",
-    cover:       "https://drive.google.com/thumbnail?id=1kn6L-0yJtDAk-FCAnoziUCgr2xveW9oD&sz=w1200",
+    cover:       "",
   },
 
   // ── ROOM 11 ─────────────────────────────────────────────────────
@@ -134,11 +134,11 @@ const ROOMS_DATA = [
     file:        "room11.html",
     name:        "Room 11",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "4,500,000",
+    price:       "",
     sqm:         "67",
     pricePerSqm: "67,100",
     bedBath:     "1/1",
-    cover:       "https://drive.google.com/thumbnail?id=1tORKO4SW77NL19IWJMAMLsfGV4i4PEyG&sz=w1200",
+    cover:       "",
   },
 
 ];
