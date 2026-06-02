@@ -118,13 +118,13 @@ const ROOMS_DATA = [
   // ── ROOM 10 ──────────────────────────────────────────────────────
   {
     file:        "room10.html",
-    name:        "Room 10",
+    name:        "Room10",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "",
-    sqm:         "67",
-    pricePerSqm: "59,800",
-    bedBath:     "1/1",
-    cover:       "",
+    price:       "3,950,000",
+    sqm:         "50.75",
+    pricePerSqm: "77,833",
+    bedBath:     "2/1",
+    cover:       "https://drive.google.com/thumbnail?id=1UAca1ha7PCcBrmaTckEMezOSOng9boaI&sz=w1200",
   },
 
   // ── ROOM 11 ──────────────────────────────────────────────────────
