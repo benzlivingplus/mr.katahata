@@ -271,7 +271,9 @@ const ROOM = {
   // ── YouTube Video ID ────────────────────────────
   // ถ้าไม่กรอก (ปล่อยว่าง "") section นี้จะซ่อนอัตโนมัติ
   // เช่น URL: https://www.youtube.com/watch?v=dQw4w9WgXcQ → videoId = "dQw4w9WgXcQ"
-  videoId: "",
+videoId: "",
+  commonPhotos: [],
+  commonAlbum:  "",
 
 // ── แผนที่ตำแหน่งห้อง ─────────────────────────────
 // ใส่ embed URL พร้อม &ll= และ &z= เพื่อซูมไปที่หมุดห้องนี้
@@ -351,6 +353,14 @@ const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
     <div class="travel-grid" id="travel-grid"></div>
   </div>
 
+<div class="gallery-section" id="common-section" style="display:none;">
+    <div class="section-label"><span class="line"></span><span>Common Area &amp; Facilities</span></div>
+    <div class="gallery-grid" id="common-grid"></div>
+    <p id="common-album-link" style="font-size:12px;color:var(--text-muted);margin-top:1rem;letter-spacing:0.05em;display:none;">
+      ดูอัลบั้มเต็ม: <a id="common-album-a" href="#" target="_blank" style="color:var(--gold);text-decoration:none;">Google Photos →</a>
+    </p>
+  </div>
+  
   <!-- VIDEO (ซ่อนถ้าไม่มี videoId) -->
   <div class="video-section" id="video-section" style="display:none;">
     <div class="section-label"><span class="line"></span><span>Video Tour</span></div>
@@ -514,6 +524,21 @@ if (ROOM.mapUrl) {
   document.getElementById('room-map-wrap').innerHTML =
     `<iframe src="${ROOM.mapUrl}" allowfullscreen loading="lazy"></iframe>`;
 } 
+
+if (ROOM.commonPhotos && ROOM.commonPhotos.length > 0) {
+  document.getElementById('common-section').style.display = 'block';
+  const cGrid = document.getElementById('common-grid');
+  const cShow = Math.min(ROOM.commonPhotos.length, 6);
+  const cRem = ROOM.commonPhotos.length - cShow;
+  ROOM.commonPhotos.slice(0, cShow).forEach((url, i) => {
+    const el = document.createElement('div'); el.className = 'g-item';
+    const isLast = i === cShow-1 && cRem > 0;
+    el.innerHTML = `<img src="${url}" alt="Common ${i+1}" loading="lazy">${isLast ? `<div class="gallery-more">+${cRem}</div>` : ''}`;
+    el.onclick = () => openLightbox(ROOM.commonPhotos, i, 'Common Area');
+    cGrid.appendChild(el);
+  });
+  if (ROOM.commonAlbum) { document.getElementById('common-album-link').style.display='block'; document.getElementById('common-album-a').href=ROOM.commonAlbum; }
+}
   
 // ── VIDEO (ซ่อนถ้าไม่มี videoId) ─────────────────────────────────────────────
 if (ROOM.videoId) {
