@@ -9,16 +9,14 @@ const ROOMS_DATA = [
 
   // ── ROOM 1 ──────────────────────────────────────────────────────
   {
-    file:        "room1.html",          // ชื่อไฟล์ HTML ของห้องนี้
-    name:        "Room 1",              // ชื่อห้อง (notranslate)
+    file:        "room1.html",
+    name:        "Room 1",
     type:        "Condominium · Low Rise · Resale",
-    price:       "3,900,000",           // ราคา (ไม่ต้องใส่ ฿)
-    sqm:         "40",                  // ขนาด (ไม่ต้องใส่ ตร.ม.)
-    pricePerSqm: "97,500",              // ราคา/ตร.ม. (ไม่ต้องใส่ ฿)
+    price:       "3,900,000",
+    sqm:         "40",
+    pricePerSqm: "97,500",
     bedBath:     "1/1",
-    cover: "https://drive.google.com/thumbnail?id=1QjK_nPsXd0-Yye24kjeD0s35xnJCbDUI&sz=w1200",
-    // ถ้า cover ว่าง ("") → card จะซ่อนรูปปก แต่ยังแสดง card
-    // ถ้า price ว่าง ("") → card ทั้งใบจะซ่อนอัตโนมัติ
+    cover:       "https://drive.google.com/thumbnail?id=1QjK_nPsXd0-Yye24kjeD0s35xnJCbDUI&sz=w1200",
   },
 
   // ── ROOM 2 ──────────────────────────────────────────────────────
@@ -26,7 +24,7 @@ const ROOMS_DATA = [
     file:        "room2.html",
     name:        "Room 2",
     type:        "Condominium · Low Rise · Resale",
-    price:       "4,900,000",                    // ← ว่าง = ซ่อน card
+    price:       "4,900,000",
     sqm:         "60",
     pricePerSqm: "81,600",
     bedBath:     "2/1",
@@ -41,7 +39,7 @@ const ROOMS_DATA = [
     price:       "4,390,000",
     sqm:         "47",
     pricePerSqm: "93,400",
-    bedBath:     "2/1",    
+    bedBath:     "2/1",
     cover:       "https://drive.google.com/thumbnail?id=1iOhN31oCZQMbwmkoZe3piOGobTCSUoJx&sz=w1200",
   },
 
@@ -53,7 +51,7 @@ const ROOMS_DATA = [
     price:       "3,990,000",
     sqm:         "38.5",
     pricePerSqm: "103,600",
-        bedBath:     "1/1",
+    bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1kOHyG37GilebNoEsMNtBNxSUFvBc7XhV&sz=w1200",
   },
 
@@ -65,7 +63,7 @@ const ROOMS_DATA = [
     price:       "3,200,000",
     sqm:         "30.48",
     pricePerSqm: "105,000",
-        bedBath:     "1/1",
+    bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1NMxCH-wM7KyQxuylFBM-9OEgjMrAxOya&sz=w1200",
   },
 
@@ -77,7 +75,7 @@ const ROOMS_DATA = [
     price:       "3,990,000",
     sqm:         "38.56",
     pricePerSqm: "103,600",
-        bedBath:     "1/1",
+    bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1jyQZunbOUbR0e9cIgfTo_iUQrRZYcr4Q&sz=w1200",
   },
 
@@ -93,16 +91,16 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1H7TbU91eIu0PVy4nvtqxxjmItXCusram&sz=w1200",
   },
 
-  // ── ROOM 8 ──────────────────────────────────────────────────────
+  // ── ROOM8 ──────────────────────────────────────────────────────
   {
     file:        "room8.html",
-    name:        "Room 8",
+    name:        "Room8",
     type:        "Condominium · Low Rise · Resale",
-    price:       "",
+    price:       "4,400,000",
     sqm:         "35",
-    pricePerSqm: "94,285",
-    bedBath:     "2/1",
-    cover:       "",
+    pricePerSqm: "125,714",
+    bedBath:     "1/1",
+    cover:       "https://drive.google.com/thumbnail?id=1zHEWFIXW-hnzWAHR5Bx4EtVSnk0OW1_A&sz=w1200",
   },
 
   // ── ROOM 9 ──────────────────────────────────────────────────────
@@ -117,7 +115,7 @@ const ROOMS_DATA = [
     cover:       "",
   },
 
-  // ── ROOM 10 ─────────────────────────────────────────────────────
+  // ── ROOM 10 ──────────────────────────────────────────────────────
   {
     file:        "room10.html",
     name:        "Room 10",
@@ -129,7 +127,7 @@ const ROOMS_DATA = [
     cover:       "",
   },
 
-  // ── ROOM 11 ─────────────────────────────────────────────────────
+  // ── ROOM 11 ──────────────────────────────────────────────────────
   {
     file:        "room11.html",
     name:        "Room 11",
@@ -140,5 +138,4 @@ const ROOMS_DATA = [
     bedBath:     "1/1",
     cover:       "",
   },
-
 ];
