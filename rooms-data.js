@@ -103,12 +103,12 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1zHEWFIXW-hnzWAHR5Bx4EtVSnk0OW1_A&sz=w1200",
   },
 
-  // ── ROOM 9 ──────────────────────────────────────────────────────5,500,000
+  // ── ROOM 9 ──────────────────────────────────────────────────────
   {
     file:        "room9.html",
     name:        "Room9",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "",
+    price:       "5,500,000",
     sqm:         "34",
     pricePerSqm: "161,765",
     bedBath:     "1/1",
