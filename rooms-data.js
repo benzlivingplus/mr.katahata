@@ -131,7 +131,7 @@ const ROOMS_DATA = [
   {
     file:        "room12.html",
     name:        "Room 12",
-    type:        "Condominium · Hi Rise · Resale",
+    type:        "Condominium · Low Rise · Resale",
     price:       "5,000,000",
     sqm:         "37.32",
     pricePerSqm: "67,100",
