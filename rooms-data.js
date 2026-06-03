@@ -141,14 +141,14 @@ const ROOMS_DATA = [
 
     // ── ROOM 12 ──────────────────────────────────────────────────────
   {
-    file:        "",
-    name:        "",
-    type:        "Condominium · Low Rise · Resale",
-    price:       "",
-    sqm:         "",
-    pricePerSqm: "",
-    bedBath:     "",
-    cover:       "https://drive.google.com/thumbnail?id=1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg&sz=w1200",
+    file:        "room12.html",
+    name:        "Room 12",
+    type:        "Condominium · Low Rise · Renovate",
+    price:       "3,999,000",
+    sqm:         "63.22",
+    pricePerSqm: "63,255",
+    bedBath:     "2/1",
+    cover:       "https://drive.google.com/thumbnail?id=1se87fxTV9m26UIC0OXxp5E9uVy7QyRFx&sz=w1200",
   },
 
 
