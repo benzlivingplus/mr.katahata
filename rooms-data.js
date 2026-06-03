@@ -132,7 +132,7 @@ const ROOMS_DATA = [
     file:        "room12.html",
     name:        "Room 12",
     type:        "Condominium · Low Rise · Resale",
-    price:       "5,000,000",
+    price:       "",
     sqm:         "37.32",
     pricePerSqm: "67,100",
     bedBath:     "2/2",
@@ -148,7 +148,7 @@ const ROOMS_DATA = [
     sqm:         "37.32",
     pricePerSqm: "67,100",
     bedBath:     "2/2",
-    cover:       "https://drive.google.com/file/d/1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg/view?usp=drive_link",
+    cover:       "https://drive.google.com/thumbnail?id=1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg&sz=w1200",
   },
 
 
