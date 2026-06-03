@@ -12,7 +12,7 @@ const ROOMS_DATA = [
     file:        "room1.html",
     name:        "Room 1",
     type:        "Condominium · Low Rise · Resale",
-    price:       "3,900,000",
+    price:       "", 3,900,000
     sqm:         "40",
     pricePerSqm: "97,500",
     bedBath:     "1/1",
@@ -24,7 +24,7 @@ const ROOMS_DATA = [
     file:        "room2.html",
     name:        "Room 2",
     type:        "Condominium · Low Rise · Resale",
-    price:       "4,900,000",
+    price:       "", 4,900,000
     sqm:         "60",
     pricePerSqm: "81,600",
     bedBath:     "2/1",
@@ -36,7 +36,7 @@ const ROOMS_DATA = [
     file:        "room3.html",
     name:        "Room 3",
     type:        "Condominium · Low Rise · Resale",
-    price:       "4,390,000",
+    price:       "", 4,390,000
     sqm:         "47",
     pricePerSqm: "93,400",
     bedBath:     "2/1",
@@ -84,7 +84,7 @@ const ROOMS_DATA = [
     file:        "room7.html",
     name:        "Room 7",
     type:        "Condominium · Low Rise · Resale",
-    price:       "3,300,000",
+    price:       "", 3,300,000
     sqm:         "35",
     pricePerSqm: "94,285",
     bedBath:     "2/1",
