@@ -328,7 +328,15 @@ if (OTHER_ROOMS.length>0) {
   let pos=0; const cardW=276; const maxPos=Math.max(0,OTHER_ROOMS.length-3);
   const prev=document.getElementById('s-prev'); const next=document.getElementById('s-next');
   function updateSlider() { track.style.transform=`translateX(-${pos*cardW}px)`; prev.disabled=pos===0; next.disabled=pos>=maxPos; }
-  prev.onclick=()=>{pos=Math.max(0,pos-1);updateSlider();}; next.onclick=()=>{pos=Math.min(maxPos,pos+1);updateSlider();}; updateSlider();
+prev.onclick=()=>{pos=Math.max(0,pos-1);updateSlider();}; next.onclick=()=>{pos=Math.min(maxPos,pos+1);updateSlider();}; updateSlider();
+let tx=0;
+track.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+track.addEventListener('touchend',e=>{
+  const dx=tx-e.changedTouches[0].clientX;
+  if(dx>50&&pos<maxPos){pos++;updateSlider();}
+  if(dx<-50&&pos>0){pos--;updateSlider();}
+},{passive:true});
+  
 }
 let lbImages=[]; let lbIndex=0;
 let lbTouchStartX=0;
