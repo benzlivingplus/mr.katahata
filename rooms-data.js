@@ -129,8 +129,8 @@ const ROOMS_DATA = [
 
   // ── ROOM 11 ──────────────────────────────────────────────────────
   {
-    file:        "room11.html",
-    name:        "Room 11",
+    file:        "room12.html",
+    name:        "Room 12",
     type:        "Condominium · Hi Rise · Resale",
     price:       "",
     sqm:         "67",
@@ -141,14 +141,14 @@ const ROOMS_DATA = [
 
     // ── ROOM 12 ──────────────────────────────────────────────────────
   {
-    file:        "room12.html",
-    name:        "Room 12",
-    type:        "Condominium · Hi Rise · Resale",
-    price:       "",
-    sqm:         "67",
+    file:        "room11.html",
+    name:        "Room 11",
+    type:        "Condominium · Low Rise · Resale",
+    price:       "5,000,000",
+    sqm:         "37.32",
     pricePerSqm: "67,100",
-    bedBath:     "1/1",
-    cover:       "",
+    bedBath:     "2/2",
+    cover:       "https://drive.google.com/file/d/1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg/view?usp=drive_link",
   },
 
 
