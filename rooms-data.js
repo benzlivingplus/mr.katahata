@@ -43,36 +43,36 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1iOhN31oCZQMbwmkoZe3piOGobTCSUoJx&sz=w1200",
   },
 
-  // ── ROOM 4 ──────────────────────────────────────────────────────
+  // ── ROOM 4 ──────────────────────────────────────────────────────3,990,000
   {
     file:        "room4.html",
     name:        "Room 4",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "3,990,000",
+    price:       "",
     sqm:         "38.5",
     pricePerSqm: "103,600",
     bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1kOHyG37GilebNoEsMNtBNxSUFvBc7XhV&sz=w1200",
   },
 
-  // ── ROOM 5 ──────────────────────────────────────────────────────
+  // ── ROOM 5 ──────────────────────────────────────────────────────3,200,000
   {
     file:        "room5.html",
     name:        "Room 5",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "3,200,000",
+    price:       "",
     sqm:         "30.48",
     pricePerSqm: "105,000",
     bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1NMxCH-wM7KyQxuylFBM-9OEgjMrAxOya&sz=w1200",
   },
 
-  // ── ROOM 6 ──────────────────────────────────────────────────────
+  // ── ROOM 6 ──────────────────────────────────────────────────────3,990,000
   {
     file:        "room6.html",
     name:        "Room 6",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "3,990,000",
+    price:       "",
     sqm:         "38.56",
     pricePerSqm: "103,600",
     bedBath:     "1/1",
@@ -103,12 +103,12 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1zHEWFIXW-hnzWAHR5Bx4EtVSnk0OW1_A&sz=w1200",
   },
 
-  // ── ROOM 9 ──────────────────────────────────────────────────────
+  // ── ROOM 9 ──────────────────────────────────────────────────────5,500,000
   {
     file:        "room9.html",
     name:        "Room9",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "5,500,000",
+    price:       "",
     sqm:         "34",
     pricePerSqm: "161,765",
     bedBath:     "1/1",
