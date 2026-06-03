@@ -132,11 +132,11 @@ const ROOMS_DATA = [
     file:        "room12.html",
     name:        "Room 12",
     type:        "Condominium · Hi Rise · Resale",
-    price:       "",
-    sqm:         "67",
+    price:       "5,000,000",
+    sqm:         "37.32",
     pricePerSqm: "67,100",
-    bedBath:     "1/1",
-    cover:       "",
+    bedBath:     "2/2",
+    cover:       "https://drive.google.com/file/d/1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg/view?usp=drive_link",
   },
 
     // ── ROOM 12 ──────────────────────────────────────────────────────
