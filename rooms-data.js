@@ -7,36 +7,36 @@
 
 const ROOMS_DATA = [
 
-  // ── ROOM 1 ──────────────────────────────────────────────────────
+  // ── ROOM 1 ──────────────────────────────────────────────────────3,900,000
   {
     file:        "room1.html",
     name:        "Room 1",
     type:        "Condominium · Low Rise · Resale",
-    price:       "", 3,900,000
+    price:       "", 
     sqm:         "40",
     pricePerSqm: "97,500",
     bedBath:     "1/1",
     cover:       "https://drive.google.com/thumbnail?id=1QjK_nPsXd0-Yye24kjeD0s35xnJCbDUI&sz=w1200",
   },
 
-  // ── ROOM 2 ──────────────────────────────────────────────────────
+  // ── ROOM 2 ──────────────────────────────────────────────────────4,900,000
   {
     file:        "room2.html",
     name:        "Room 2",
     type:        "Condominium · Low Rise · Resale",
-    price:       "", 4,900,000
+    price:       "", 
     sqm:         "60",
     pricePerSqm: "81,600",
     bedBath:     "2/1",
     cover:       "https://drive.google.com/thumbnail?id=1zTrGfByha2XsZSEYNW0SI9-Nk2Aaqebq&sz=w1200",
   },
 
-  // ── ROOM 3 ──────────────────────────────────────────────────────
+  // ── ROOM 3 ──────────────────────────────────────────────────────4,390,000
   {
     file:        "room3.html",
     name:        "Room 3",
     type:        "Condominium · Low Rise · Resale",
-    price:       "", 4,390,000
+    price:       "", 
     sqm:         "47",
     pricePerSqm: "93,400",
     bedBath:     "2/1",
@@ -79,12 +79,12 @@ const ROOMS_DATA = [
     cover:       "https://drive.google.com/thumbnail?id=1jyQZunbOUbR0e9cIgfTo_iUQrRZYcr4Q&sz=w1200",
   },
 
-  // ── ROOM 7 ──────────────────────────────────────────────────────
+  // ── ROOM 7 ──────────────────────────────────────────────────────  3,300,000
   {
     file:        "room7.html",
     name:        "Room 7",
     type:        "Condominium · Low Rise · Resale",
-    price:       "", 3,300,000
+    price:       "",
     sqm:         "35",
     pricePerSqm: "94,285",
     bedBath:     "2/1",
