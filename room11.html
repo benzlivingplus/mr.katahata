@@ -144,8 +144,9 @@ const ROOM = {
     "https://drive.google.com/thumbnail?id=175CD9C_aTWU5s6WZQze1YvI7lfdhG8Ur&sz=w1200",
     "https://drive.google.com/thumbnail?id=1dIOKxp1AWefehw4MpsSfTrzwJl_55vB_&sz=w1200",
     "https://drive.google.com/thumbnail?id=19Zggz3GZ_fuEhgeCrmhSOpfqo9xBrujx&sz=w1200",
-    "https://drive.google.com/thumbnail?id=1brUVWg3u3NYZtq4W5zc2k44Mj3QVyw16&sz=w1200",
+
   ],
+  roomPlan:    "https://drive.google.com/thumbnail?id=1brUVWg3u3NYZtq4W5zc2k44Mj3QVyw16&sz=w1200",  // ← URL รูป Floor Plan (1 รูป) ถ้าว่างจะซ่อน section อัตโนมัติ
   photosAlbum: "",
   travelCarPhoto:    "https://drive.google.com/thumbnail?id=1OMOeT0hetyBr-1W4mSKG4zjlt0PJscRg&sz=w1200",
   travelCarCaption:  "🚗 By car (15 min)",
@@ -204,6 +205,12 @@ const OTHER_ROOMS = (typeof ROOMS_DATA !== 'undefined')
     <p id="album-link" style="font-size:12px;color:var(--text-muted);margin-top:1rem;letter-spacing:0.05em;display:none;">
       ดูอัลบั้มเต็ม: <a id="album-a" href="#" target="_blank" style="color:var(--gold);text-decoration:none;">Google Photos →</a>
     </p>
+  </div>
+  <div class="gallery-section" id="plan-section" style="display:none;">
+    <div class="section-label"><span class="line"></span><span>Room Plan</span></div>
+    <div id="plan-wrap" style="background:var(--charcoal-mid);border:1px solid var(--charcoal-border);border-radius:2px;overflow:hidden;cursor:pointer;">
+      <img id="plan-img" src="" alt="Room Plan" style="width:100%;display:block;object-fit:contain;max-height:500px;">
+    </div>
   </div>
   <div class="gallery-section" id="common-section" style="display:none;">
     <div class="section-label"><span class="line"></span><span>Common Area &amp; Facilities</span></div>
@@ -276,6 +283,11 @@ document.getElementById('specs-row').innerHTML = [
 if (!ROOM.description.trim()) { document.getElementById('desc-section').style.display='none'; }
 else { document.getElementById('desc-text').innerHTML = ROOM.description.replace(/\n/g,'<br>'); }
 if (ROOM.photosAlbum) { document.getElementById('album-link').style.display='block'; document.getElementById('album-a').href=ROOM.photosAlbum; }
+if (ROOM.roomPlan) {
+  document.getElementById('plan-section').style.display = 'block';
+  document.getElementById('plan-img').src = ROOM.roomPlan;
+  document.getElementById('plan-wrap').onclick = () => openLightbox([ROOM.roomPlan], 0, 'Room Plan');
+}
 const grid = document.getElementById('gallery-grid');
 if (!ROOM.photos.length) {
   grid.innerHTML = '<div style="grid-column:1/-1;padding:3rem;text-align:center;color:var(--text-muted);font-size:13px;border:1px dashed rgba(201,169,110,0.2);">ไม่มีรูปภาพ</div>';
@@ -338,6 +350,12 @@ if (OTHER_ROOMS.length>0) {
   prev.onclick=()=>{pos=Math.max(0,pos-1);updateSlider();}; next.onclick=()=>{pos=Math.min(maxPos,pos+1);updateSlider();}; updateSlider();
 }
 let lbImages=[]; let lbIndex=0;
+let lbTouchStartX=0;
+document.getElementById('lightbox').addEventListener('touchstart',e=>{lbTouchStartX=e.touches[0].clientX;},{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',e=>{
+  const dx=lbTouchStartX-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>50){if(dx>0)lbNav(1);else lbNav(-1);}
+},{passive:true});
 function openLightbox(images,startIndex,caption) { lbImages=images; lbIndex=startIndex; renderLightbox(caption); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function renderLightbox(captionOverride) {
   document.getElementById('lb-img').src=lbImages[lbIndex];
